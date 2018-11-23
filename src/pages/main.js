@@ -1,0 +1,1 @@
+export demo from './components/demo/index';
