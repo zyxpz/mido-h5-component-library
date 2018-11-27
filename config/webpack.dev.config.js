@@ -6,6 +6,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const webpackMerge = require('webpack-merge');
 
+const chalk = require('chalk');
+
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+
 const {
   path,
   APP_PATH,
@@ -28,25 +32,44 @@ const devConfig = {
 
 const config = webpackMerge(commonConfig, devConfig);
 
+config.plugins.push(
+  new FriendlyErrorsWebpackPlugin({
+    compilationSuccessInfo: {},
+    onErrors: () => {},
+    clearConsole: true,
+    additionalFormatters: [],
+    additionalTransformers: []
+  })
+)
+
 const compiler = webpack(config);
+
+// compiler.hooks.done.tap('dev', stats => {
+//   if (stats.hasErrors()) {
+//     process.stdout.write('\x07');
+//     console.log('webpack error')
+//     return;
+//   }
+// })
 
 const server = new WebpackDevServer(compiler, {
   contentBase: path.join(__dirname, 'dist'),
-  historyApiFallback: {
-    rewrites: [{
-      from: /./,
-      to: './error.html'
-    }]
-  },
+  historyApiFallback: false,
   hot: true,
   inline: true,
   stats: 'none',
-  // quiet: true,
+  quiet: true,
   overlay: true,
   inline: true,
-  hot: true
+  hot: true,
+  compress: true
 });
 
-server.listen('8001', () => {
-  console.log('服务器已启动');
+server.listen('8001', 'localhost', err => {
+  if (err) {
+    console.error(err);
+    return;
+  }
+  console.log(chalk.cyan('Starting the development server...\n'));
+  console.log(chalk.cyan('http://localhost:8001\n'));
 })
