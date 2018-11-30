@@ -1,9 +1,15 @@
 {
   "presets": [
-		"env",
-		"stage-0"
+    "env",
+    "stage-0"
   ],
   "plugins": [
-    
+    [
+      "import",
+      [{
+        "libraryName": "mido-cp",
+        "libraryDirectory": "lib/"
+      }]
+    ]
   ]
 }
