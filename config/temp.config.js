@@ -26,17 +26,19 @@ const getEntryFile = (dir) => {
 	fs.readdirSync(directory, {
 		encoding: 'utf-8'
 	}).forEach((file) => {
-		console.log(file);
 		// 文件路径
 		const filePath = path.join(directory, file);
 
 		const fileStat = fs.statSync(filePath);
 
+		// console.log(filePath);
+
 		if (fileStat.isDirectory() && !fileStat.isFile()) {
 			const subdir = path.join(dir, file);
 			cpName = file;
+			console.log(cpName, subdir, filePath);
 			getEntryFile(subdir);
-		} else if (fileStat.isFile()) {
+		} else if (fileStat.isFile() && !fileStat.isDirectory()) {
 			// 文件后缀
 			const fileExtName = path.extname(filePath);
 
