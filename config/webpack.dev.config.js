@@ -10,6 +10,8 @@ const chalk = require('chalk');
 
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 
+const { entry, webpackHtmls, openPage } = require('./temp.config');
+
 const stream = process.stderr;
 
 const {
@@ -22,14 +24,20 @@ const {
 } = require('./webpack.common.config');
 
 const devConfig = {
+	devtool: 'cheap-module-eval-source-map',
 	mode: milieu,
+	entry, 
 	plugins: [
 		new HtmlWebpackPlugin({
-			template: path.resolve(APP_PATH, 'src/static/index.tpl.html'),
+			template: path.resolve(APP_PATH, 'src/static/index.tpl.ejs'),
 			chunks: ['common', 'main'], // 当前路由所包含的模块，注意common引入方式
-			inject: 'body',
-			filename: './index.html'
-		})
+			inject: false,
+			filename: './index.html',
+			title: `All Demo`,
+			publicPath: milieu === 'development' ? '' : '/mido-h5-component-library/dist',
+			openPage: openPage
+		}),
+		...webpackHtmls
 	]
 };
 
