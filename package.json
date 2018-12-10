@@ -2,9 +2,9 @@
   "name": "mido-h5-cp",
   "version": "1.0.0",
   "description": "h5组件库和一些公用方法",
-  "main": "index.js",
+  "main": "lib/main.js",
   "entry": {
-    "main": "./lib/main.js"
+    "main": "./src/main.js"
   },
   "scripts": {
     "start": "npm run user-setting && npm run dev",

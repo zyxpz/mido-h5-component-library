@@ -30,6 +30,6 @@ npm-debug
 _tmp
 www/
 .vscode
-# /lib
+/lib
 
 config/user.config.js
