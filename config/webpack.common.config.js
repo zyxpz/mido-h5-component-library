@@ -133,7 +133,7 @@ const config = {
 };
 
 const defaultConfig = {
-	devtool: milieu === 'cheap-module-eval-source-map' ? 'true' : undefined,
+	devtool: milieu === 'development' ? 'cheap-module-eval-source-map' : undefined,
 	node: {
 		global: true,
 		crypto: 'empty',
