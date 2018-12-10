@@ -19,7 +19,7 @@ Thumbs.db
 .build
 node_modules
 _site
-_dist
+# /dist
 _package
 sea-modules
 spm_modules
@@ -28,7 +28,6 @@ spm_modules
 npm-debug
 .gulp
 _tmp
-dist
 www/
 .vscode
 lib
