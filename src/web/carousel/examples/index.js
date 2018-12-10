@@ -1,4 +1,4 @@
-import Carousel from '../carousel';
+import { Carousel } from '../../../main';
 import './index.less';
 
 const carousel = new Carousel({

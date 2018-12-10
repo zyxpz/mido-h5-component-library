@@ -1,1 +1,1 @@
-export Demo from './demo';
+export { default } from './demo';

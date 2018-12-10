@@ -1,1 +1,3 @@
-export default console.log('demo');
+export default function demo(text) {
+	console.log(text);
+}

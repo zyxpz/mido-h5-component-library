@@ -1,2 +1,4 @@
 import './index.less';
-export default console.log('demo');
+import { demo } from '../../../main';
+
+demo('demo');

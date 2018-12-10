@@ -33,3 +33,5 @@ www/
 /lib
 
 config/user.config.js
+
+/coverage
