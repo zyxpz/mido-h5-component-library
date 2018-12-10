@@ -1,2 +1,1 @@
-import './index.less';
-export default console.log('demo');
+export Demo from './demo';

@@ -29,16 +29,14 @@ const getEntryFile = (dir) => {
 		// 文件路径
 		const filePath = path.join(directory, file);
 
+		// 文件状态
 		const fileStat = fs.statSync(filePath);
 
-		// console.log(filePath);
-
-		if (fileStat.isDirectory() && !fileStat.isFile()) {
-			const subdir = path.join(dir, file);
+		if (fileStat.isDirectory()) {
+			const subdir = path.join(dir, file, 'examples');
 			cpName = file;
-			console.log(cpName, subdir, filePath);
 			getEntryFile(subdir);
-		} else if (fileStat.isFile() && !fileStat.isDirectory()) {
+		} else if (fileStat.isFile()) {
 			// 文件后缀
 			const fileExtName = path.extname(filePath);
 

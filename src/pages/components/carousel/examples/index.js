@@ -1,4 +1,5 @@
 import Carousel from '../carousel';
+import './index.less';
 
 const carousel = new Carousel({
 	warp: 'w1',
