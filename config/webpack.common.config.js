@@ -64,6 +64,7 @@ const config = {
 		{
 			test: /\.css$/,
 			use: [
+				MiniCssExtractPlugin.loader,
 				'css-loader',
 				postcssLoader,
 			]
@@ -71,6 +72,7 @@ const config = {
 		{
 			test: /\.less$/,
 			use: [
+				MiniCssExtractPlugin.loader,
 				'css-loader',
 				'less-loader',
 				postcssLoader,
@@ -125,10 +127,10 @@ const config = {
 		// }
 	},
 	plugins: [
-		// new MiniCssExtractPlugin({
-		// 	filename: 'css/[name].[hash:8].css',
-		// 	allChunks: true
-		// })
+		new MiniCssExtractPlugin({
+			filename: '[name].[hash:8].css',
+			allChunks: true
+		})
 	]
 };
 

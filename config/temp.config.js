@@ -34,7 +34,7 @@ const getEntryFile = (dir) => {
 
 		if (fileStat.isDirectory()) {
 			const subdir = path.join(dir, file, 'examples');
-			cpName = file;
+			cpName = path.join(dir, file, 'Basic');
 			getEntryFile(subdir);
 		} else if (fileStat.isFile()) {
 			// 文件后缀
@@ -47,19 +47,18 @@ const getEntryFile = (dir) => {
 			if (fileExtName === '.html') {
 				let filename = '';
 				if (milieu === 'production') {
-					console.log(filePath);
 					filename = filePath.replace(/src/, 'dist').replace(/examples\//, '');
 				} else {
 					filename = cpName;
 				}
 				openPage[cpName] = `/${cpName}`;
+				console.log(filename, cpName);
 				html.push(
 					new HtmlWebpackPlugin({
 						template: filePath,
 						inject: 'body',
 						filename: filename,
 						chunks: [cpName],
-						publicPath: '',
 					})
 				);
 			}
