@@ -29,7 +29,7 @@ const devConfig = {
 	entry, 
 	plugins: [
 		new HtmlWebpackPlugin({
-			template: path.resolve(APP_PATH, 'src/static/index.tpl.ejs'),
+			template: path.resolve(APP_PATH, 'templates/index.tpl.ejs'),
 			chunks: ['common', 'main'], // 当前路由所包含的模块，注意common引入方式
 			inject: false,
 			filename: './index.html',

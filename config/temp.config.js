@@ -72,7 +72,7 @@ const {
 	entrys,
 	webpackHtml,
 	openPages
-} = getEntryFile('pages/components');
+} = getEntryFile('web');
 
 module.exports = {
 	entry: entrys,

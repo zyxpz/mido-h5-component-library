@@ -1,28 +1,30 @@
 {
-  "name": "mido-h5-component-library",
+  "name": "mido-h5-cp",
   "version": "1.0.0",
   "description": "h5组件库和一些公用方法",
   "main": "index.js",
   "entry": {
-    "main": "./src/pages/main.js"
+    "main": "./lib/main.js"
   },
   "scripts": {
     "start": "npm run user-setting && npm run dev",
     "dev": "npm run all",
     "user-setting": "node ./config/user.setting.config.js",
     "sever": "node ./config/webpack.dev.config.js",
-    "lint": "esw ./config/*.config.* ./src/pages/**/*.js",
+    "lint": "esw ./config/*.config.* ./src/**/*.js",
     "lint:fix": "npm run lint -- --fix",
     "lint:watch": "npm run lint -- --fix --watch",
     "lint:style": "stylelint --fix --syntax less src",
     "lint-staged": "lint-staged",
-    "all": "npm-run-all --parallel --race --continue-on-error lint:watch sever"
+    "all": "npm-run-all --parallel --race --continue-on-error lint:watch sever",
+    "lib": "rm -rf ./lib && babel src --out-dir lib --copy-files --ignore **.test.js,**.md,examples/**"
   },
   "author": "Midnight Blues",
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {
     "autoprefixer": "^9.3.1",
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^7.1.4",
@@ -72,7 +74,6 @@
     ]
   },
   "files": [
-    "bin",
     "lib",
     "package.json",
     "README.md"
