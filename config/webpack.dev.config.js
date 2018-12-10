@@ -23,6 +23,8 @@ const {
 	port,
 } = require('./webpack.common.config');
 
+console.log('NODE_ENV:', milieu);
+
 const devConfig = {
 	devtool: 'cheap-module-eval-source-map',
 	mode: milieu,
@@ -34,7 +36,7 @@ const devConfig = {
 			inject: false,
 			filename: './index.html',
 			title: `All Demo`,
-			publicPath: milieu === 'development' ? '' : '/mido-h5-component-library/dist',
+			publicPath: milieu === 'development' ? '' : '/mido-h5-cp/dist',
 			openPage: openPage
 		}),
 		...webpackHtmls

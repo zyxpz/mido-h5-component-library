@@ -37,14 +37,13 @@ const config = {
 	entry,
 	output: {
 		path: path.resolve(APP_PATH, 'dist'),
-		filename: 'js/[name].[hash:8].bundle.js', // 每个页面对应的主js的生成配置
-		chunkFilename: 'js/[name].[hash:8].chunk.js', // chunk生成的配置
-		sourceMapFilename: 'js/[name].[hash:8].bundle.map',
+		filename: '[name].[hash:8].js', // 每个页面对应的主js的生成配置
+		chunkFilename: '[name].[hash:8].js', // chunk生成的配置
+		sourceMapFilename: '[name].[hash:8].map',
 		/**
      * html引用路径
-     * publicPath: ENV_IS_DEV ? './' : 'https://cdn.example.com/'
      */
-		publicPath: '/'
+		publicPath: milieu === 'production' ? '/mido-h5-cp/dist' : '/'
 	},
 	module: {
 		rules: [{
@@ -65,7 +64,6 @@ const config = {
 		{
 			test: /\.css$/,
 			use: [
-				MiniCssExtractPlugin.loader,
 				'css-loader',
 				postcssLoader,
 			]
@@ -73,7 +71,6 @@ const config = {
 		{
 			test: /\.less$/,
 			use: [
-				MiniCssExtractPlugin.loader,
 				'css-loader',
 				'less-loader',
 				postcssLoader,
@@ -103,35 +100,35 @@ const config = {
 		/**
      * CommonsChunkPlugin
      */
-		splitChunks: {
-			cacheGroups: {
-				vendor: { // node_modules内的依赖库
-					chunks: "all",
-					test: /[\\/]node_modules[\\/]/,
-					name: "vendor",
-					minChunks: 1, // 被不同entry引用次数(import),1次的话没必要提取
-					maxInitialRequests: 5,
-					minSize: 0,
-					priority: 100,
-					// enforce: true?
-				},
-				common: { // ‘src/js’ 下的js文件
-					chunks: "all",
-					test: /[\\/]src[\\/]js[\\/]/, // 也可以值文件/[\\/]src[\\/]js[\\/].*\.js/,  
-					name: "common", // 生成文件名，依据output规则
-					minChunks: 2,
-					maxInitialRequests: 5,
-					minSize: 0,
-					priority: 1
-				}
-			}
-		}
+		// splitChunks: {
+		// 	cacheGroups: {
+		// 		vendor: { // node_modules内的依赖库
+		// 			chunks: "all",
+		// 			test: /[\\/]node_modules[\\/]/,
+		// 			name: "vendor",
+		// 			minChunks: 1, // 被不同entry引用次数(import),1次的话没必要提取
+		// 			maxInitialRequests: 5,
+		// 			minSize: 0,
+		// 			priority: 100,
+		// 			// enforce: true?
+		// 		},
+		// 		common: { // ‘src/js’ 下的js文件
+		// 			chunks: "all",
+		// 			test: /[\\/]src[\\/]js[\\/]/, // 也可以值文件/[\\/]src[\\/]js[\\/].*\.js/,  
+		// 			name: "common", // 生成文件名，依据output规则
+		// 			minChunks: 2,
+		// 			maxInitialRequests: 5,
+		// 			minSize: 0,
+		// 			priority: 1
+		// 		}
+		// 	}
+		// }
 	},
 	plugins: [
-		new MiniCssExtractPlugin({
-			filename: 'css/[name].[hash:8].css',
-			allChunks: true
-		})
+		// new MiniCssExtractPlugin({
+		// 	filename: 'css/[name].[hash:8].css',
+		// 	allChunks: true
+		// })
 	]
 };
 

@@ -45,12 +45,19 @@ const getEntryFile = (dir) => {
 			}
 
 			if (fileExtName === '.html') {
-				openPage[cpName] = cpName;
+				let filename = '';
+				if (milieu === 'production') {
+					console.log(filePath);
+					filename = filePath.replace(/src/, 'dist').replace(/examples\//, '');
+				} else {
+					filename = cpName;
+				}
+				openPage[cpName] = `/${cpName}`;
 				html.push(
 					new HtmlWebpackPlugin({
 						template: filePath,
 						inject: 'body',
-						filename: cpName,
+						filename: filename,
 						chunks: [cpName],
 						publicPath: '',
 					})
