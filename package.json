@@ -19,7 +19,7 @@
     "all": "npm-run-all --parallel --race --continue-on-error lint:watch sever",
     "lib": "rm -rf ./lib && babel src --out-dir lib --copy-files --ignore **.test.js,**.md,examples/**",
     "build": "cross-env NODE_ENV=production node config/webpack.dist.config.js",
-    "test": "babel-node $(npm bin)/babel-istanbul cover $(npm bin)/_mocha --opts ./src/**/**/test --no-timeout"
+    "test": "babel-node $(npm bin)/babel-istanbul cover $(npm bin)/_mocha ./src/**/**/test"
   },
   "author": "Midnight Blues",
   "license": "ISC",
@@ -29,6 +29,7 @@
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^10.0.1",
+    "babel-istanbul": "^0.12.2",
     "babel-loader": "^7.1.4",
     "babel-plugin-import": "^1.11.0",
     "babel-preset-env": "^1.7.0",
