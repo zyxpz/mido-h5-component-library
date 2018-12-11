@@ -24,3 +24,13 @@ npm install babel-plugin-import --save-dev
 	]
 }
 ```
+## [demo](https://zyxpz.github.io/mido-h5-cp/dist/index.html)
+
+```js
+import { carousel } from 'mido-h5-cp';
+```
+## 组件
+- [轮播图](https://zyxpz.github.io/mido-h5-cp/dist/web/carousel/Basic)
+
+## 通用方法
+- []
