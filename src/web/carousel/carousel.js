@@ -13,7 +13,7 @@ export default class Carousel {
 			startPos: '', // 初始位置
 			endPos: '', // 结束位置
 			play: opts.play || false, // 自动播放
-			time: opts.time || 3000, // 播放时间 默认2000
+			time: opts.time || 3000, // 播放时间 默认3000
 			horizontal: opts.horizontal || false, // 方向 默认横向
 			point: opts.point || false,
 			pointColor: opts.pointColor || 'blue',
@@ -147,7 +147,7 @@ export default class Carousel {
 
 	handleTouchStart(e) {
 		e.preventDefault();
-    
+
 		if (this.stop) {
 			console.log('stop');
 			return;
@@ -191,19 +191,22 @@ export default class Carousel {
 			console.log('stop');
 			return;
 		}
-		if (this.attrs.horizontal && this.attrs.endPos !== '') {
-			if ((this.attrs.endPosX - this.attrs.startPosX) > 10) {
-				this.prev();
-			} else if ((this.attrs.endPosX - this.attrs.startPosX) < -10) {
-				this.next();
-			}
-		} else {
-			if ((this.attrs.endPos - this.attrs.startPos) > 10) {
-				this.prev();
-			} else if ((this.attrs.endPos - this.attrs.startPos) < -10) {
-				this.next();
+		if (this.attrs.endPos !== '') {
+			if (this.attrs.horizontal) {
+				if ((this.attrs.endPosX - this.attrs.startPosX) > 10) {
+					this.prev();
+				} else if ((this.attrs.endPosX - this.attrs.startPosX) < -10) {
+					this.next();
+				}
+			} else {
+				if ((this.attrs.endPos - this.attrs.startPos) > 10) {
+					this.prev();
+				} else if ((this.attrs.endPos - this.attrs.startPos) < -10) {
+					this.next();
+				}
 			}
 		}
+
 
 		if (this.attrs.play) {
 			this.handlePlayer();
