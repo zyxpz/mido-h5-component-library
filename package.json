@@ -17,7 +17,7 @@
 		"start": "npm run user-setting && npm run dev",
 		"dev": "npm run all",
 		"user-setting": "node ./config/user.setting.config.js",
-		"sever": "node ./config/webpack.dev.config.js",
+		"sever": "npm run tsconfig-dev && node ./config/webpack.dev.config.js",
 		"lint": "esw ./config/*.config.* ./src/**/*.js",
 		"lint:fix": "npm run lint -- --fix",
 		"lint:watch": "npm run lint -- --fix --watch",
@@ -30,7 +30,8 @@
 		"tslint": "node ./node_modules/.bin/tslint -p ./tsconfig.json --fix",
 		"tslib": "npm run tsconfig-lib && tsc -b",
     "tsconfig-lib": "cross-env NODE_LIB=lib node tsconfig.js",
-    "tsconfig-dist": "cross-env NODE_LIB=dist node tsconfig.js"
+		"tsconfig-dist": "cross-env NODE_LIB=dist node tsconfig.js",
+		"tsconfig-dev": "cross-env NODE_LIB=dev node tsconfig.js"
 	},
 	"author": "Midnight Blues",
 	"license": "ISC",

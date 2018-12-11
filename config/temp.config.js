@@ -52,7 +52,6 @@ const getEntryFile = (dir) => {
 					filename = cpName;
 				}
 				openPage[cpName] = `/${cpName}`;
-				console.log(filename, cpName);
 				html.push(
 					new HtmlWebpackPlugin({
 						template: filePath,
