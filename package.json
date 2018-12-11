@@ -25,10 +25,12 @@
 		"lint-staged": "lint-staged",
 		"all": "npm-run-all --parallel --race --continue-on-error lint:watch sever",
 		"lib": "rm -rf ./lib && babel src --out-dir lib --copy-files --ignore **.test.js,**.md,examples/** && npm run tslib",
-		"build": "cross-env NODE_ENV=production node config/webpack.dist.config.js",
+		"build": "npm run tsconfig-dist && cross-env NODE_ENV=production node config/webpack.dist.config.js",
 		"test": "mocha ./src/web/demo/test --compilers js:babel-core/register",
 		"tslint": "node ./node_modules/.bin/tslint -p ./tsconfig.json --fix",
-		"tslib": "tsc -b"
+		"tslib": "npm run tsconfig-lib && tsc -b",
+    "tsconfig-lib": "cross-env NODE_LIB=lib node tsconfig.js",
+    "tsconfig-dist": "cross-env NODE_LIB=dist node tsconfig.js"
 	},
 	"author": "Midnight Blues",
 	"license": "ISC",

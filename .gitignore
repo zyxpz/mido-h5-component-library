@@ -35,3 +35,5 @@ www/
 config/user.config.js
 
 /coverage
+
+/tsconfig.json
