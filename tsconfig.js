@@ -8,16 +8,17 @@ const contents = {
 	"compilerOptions": {
 		"module": "commonjs",
 		"target": "es5",
-		"sourceMap": true,
+		"sourceMap": path === 'lib' ? false : true,
 		"declaration": true,
 		"composite": true,
-		"outDir": `./${path}/`
+		"outDir": `./${path}/`,
+		"rootDir": "",
 	},
 	"exclude": [
 		"node_modules"
 	],
-	"files": [
-		"./src/web/pullDown/pullDown.ts"
+	"include": [
+		"src/**/*"
 	],
 	"references": [{
 		"path": ""
