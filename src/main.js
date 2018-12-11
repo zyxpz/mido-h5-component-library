@@ -1,7 +1,3 @@
-import demo from './web/demo/index';
-import Carousel from './web/carousel/index';
-
-export {
-	demo,
-	Carousel
-};
+export demo from './web/demo/index';
+export Carousel from './web/carousel/index';
+export Pulldown from './web/pullDown/index';

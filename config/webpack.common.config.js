@@ -12,7 +12,9 @@ const webpackMerge = require('webpack-merge');
 
 const milieu = process.env.NODE_ENV || 'development';
 
-const { port } = require('./user.config');
+const {
+	port
+} = require('./user.config');
 
 const {
 	entry
@@ -41,8 +43,8 @@ const config = {
 		chunkFilename: '[name].[hash:8].js', // chunk生成的配置
 		sourceMapFilename: '[name].[hash:8].map',
 		/**
-     * html引用路径
-     */
+		 * html引用路径
+		 */
 		publicPath: milieu === 'production' ? '/mido-h5-cp/dist' : '/'
 	},
 	module: {
@@ -50,8 +52,8 @@ const config = {
 			test: /\.js?$/,
 			exclude: [
 				/**
-           * 在node_modules的文件不被babel理会
-           */
+					 * 在node_modules的文件不被babel理会
+					 */
 				path.resolve(APP_PATH, 'node_modules')
 			],
 			use: [{
@@ -59,6 +61,23 @@ const config = {
 				options: {
 					cacheDirectory: true // 启用编译缓存
 				}
+			}]
+		},
+		{
+			test: /\.ts?$/,
+			exclude: [
+				/**
+					 * 在node_modules的文件不被babel理会
+					 */
+				path.resolve(APP_PATH, 'node_modules')
+			],
+			use: [{
+				loader: 'babel-loader',
+				options: {
+					cacheDirectory: true // 启用编译缓存
+				}
+			}, {
+				loader: 'ts-loader',
 			}]
 		},
 		{
@@ -100,8 +119,8 @@ const config = {
 		// 原：ModuleConcatenationPlugin() - 模块串联 - dev模式下回影响antd（比如：Pagination, 和语言有关）
 		concatenateModules: milieu !== 'development',
 		/**
-     * CommonsChunkPlugin
-     */
+		 * CommonsChunkPlugin
+		 */
 		splitChunks: {
 			cacheGroups: {
 				vendor: { // node_modules内的依赖库
