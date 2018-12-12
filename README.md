@@ -34,4 +34,4 @@ import { carousel } from 'mido-h5-cp';
 - [上拉刷新下拉加载](https://zyxpz.github.io/mido-h5-cp/dist/web/pullDown/Basic)
 
 ## 通用方法
-- []
+- [获取值](https://zyxpz.github.io/mido-h5-cp/dist/web/findData/Basic)

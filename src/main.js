@@ -1,3 +1,3 @@
-export demo from './web/demo/index';
+export findData from './web/findData/index';
 export Carousel from './web/carousel/index';
 export Pulldown from './web/pullDown/index';
