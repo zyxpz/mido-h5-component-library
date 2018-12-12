@@ -11,14 +11,14 @@ const contents = {
 		"sourceMap": path === 'lib' ? false : true,
 		"declaration": true,
 		"composite": true,
-		"outDir": `./${path}/`,
+		// "outDir": `./${path}/`,
 		"rootDir": "",
 	},
 	"exclude": [
 		"node_modules"
 	],
-	"include": [
-		"src/**/*"
+	files: [
+		"./src/web/pullDown/pullDown.ts"
 	],
 	"references": [{
 		"path": ""
