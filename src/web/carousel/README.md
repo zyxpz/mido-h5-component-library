@@ -1,6 +1,7 @@
 # h5轮播图
 
 ```js
+import { Carousel } from 'mido-h5-cp';
 const carousel = new Carousel({
 	warp: 'warp', // 父元素
 	main: 'main', // 子元素
@@ -21,3 +22,5 @@ const carousel = new Carousel({
 
 carousel.init();
 ```
+
+## [效果](https://zyxpz.github.io/mido-h5-cp/dist/web/carousel/Basic)
