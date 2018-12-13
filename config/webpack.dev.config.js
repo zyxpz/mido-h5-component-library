@@ -85,7 +85,15 @@ const server = new WebpackDevServer(compiler, {
 	overlay: true,
 	inline: true,
 	hot: true,
-	compress: true
+	compress: true,
+	before: function(app, server) {
+		app.get('/some/path.json', function(req, res) {
+			setTimeout(() => {
+				res.json({ custom: 'response', stat: 'ok' });
+			}, 3000);
+			
+		});
+	}
 });
 
 server.listen(port, 'localhost', err => {
