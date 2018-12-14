@@ -40,7 +40,7 @@ export default (opts) => {
 				userData += `${it}=${data[it]}&`;
 			}
 		});
-		
+		xhr.timeout = timeout;
 		switch (type) {
 			case 'GET':
 			case 'get':
@@ -56,43 +56,58 @@ export default (opts) => {
 					return false;
 				}
 				xhr.open('GET', `${url}${userData}`, true);
-				xhr.timeout = timeout;
+				
 				setHeader(xhr, header);
 				xhr.send(null);
-				xhr.onreadystatechange = onreadyChange(xhr, resolve, reject);
+				xhr.onreadystatechange = function () {
+					if (xhr.readyState === 4) {
+						if (xhr.status === 200) {
+							try {
+								resolve(JSON.parse(xhr.responseText));
+							} catch (error) {
+								console.log(error);
+							}
+						} else {
+							try {
+								reject(JSON.parse(xhr.responseText));
+							} catch (error) {
+								console.log(error);
+							}
+						}
+					}
+				};
 				xhr.ontimeout = function () {
 					reject('请求超时');
 				};
 				break;
 			case 'POST':
 			case 'post':
-				xhr.open('POST', opts.url, false);
-				// xhr.timeout = timeout;
+				xhr.open('POST', opts.url, true);
 				xhr.send(JSON.stringify(data));
-				xhr.onreadystatechange = onreadyChange(xhr, resolve, reject);
+				xhr.onreadystatechange = function () {
+					if (xhr.readyState === 4) {
+						if (xhr.status === 200) {
+							try {
+								resolve(JSON.parse(xhr.responseText));
+							} catch (error) {
+								console.log(error);
+							}
+						} else {
+							try {
+								reject(JSON.parse(xhr.responseText));
+							} catch (error) {
+								console.log(error);
+							}
+						}
+					}
+				};
+				xhr.ontimeout = function () {
+					reject('请求超时');
+				};
 				break;
 		}
 	});
 };
-
-// 返回数据
-function onreadyChange(xhr, resolve, reject) {
-	if (xhr.readyState === 4) {
-		if (xhr.status === 200) {
-			try {
-				resolve(JSON.parse(xhr.responseText));
-			} catch (error) {
-				console.log(error);
-			}
-		} else {
-			try {
-				reject(JSON.parse(xhr.responseText));
-			} catch (error) {
-				console.log(error);
-			}
-		}
-	}
-}
 
 function setHeader(xhr, headerData) {
 	for (const key in headerData) {
