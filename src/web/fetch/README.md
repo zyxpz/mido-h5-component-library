@@ -4,10 +4,7 @@
  	+ 不完善
 
 - (未完成)
-	+ 1、请求头问题。
-	+ 2、jsonp问题。
-	+ 3、dataType
-	+ 4、cache
+	+ cache
 
 ```js
 fetch({
@@ -30,3 +27,5 @@ fetch({
 		console.log(e);
 	});
 ```
+
+## [效果](https://zyxpz.github.io/mido-h5-cp/dist/web/fetch/Basic)
