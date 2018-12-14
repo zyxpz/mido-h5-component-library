@@ -34,3 +34,4 @@ import { carousel } from 'mido-h5-cp';
 
 ## 通用方法
 - [获取值](https://github.com/zyxpz/mido-h5-cp/tree/master/src/web/findData)
+- [fetch](https://github.com/zyxpz/mido-h5-cp/tree/master/src/web/fetch)
