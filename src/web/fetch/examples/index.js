@@ -1,16 +1,21 @@
 import { fetch } from '../../../main';
+import './index.less';
 
 fetch({
-	url: 'http://localhost:9001/some/path.json',
+	url: 'https://api.douban.com/v2/book/search',
 	data: {
-		m: 1,
-		x: 2,
-		l: 3
+		q: 'javascript',
+		count: 1
 	},
-	type: "get"
+	type: 'get',
+	timeout: 3000,
+	header: {},
+	dataType: 'jsonp',
+	callback: 'jsonCallback'
 })
 	.then((d) => {
 		console.log(d);
+		document.querySelector('.J-show').innerHTML = JSON.stringify(d);
 	})
 	.catch((e) => {
 		console.log(e);

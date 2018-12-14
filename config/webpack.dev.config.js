@@ -90,7 +90,7 @@ const server = new WebpackDevServer(compiler, {
 		app.get('/some/path.json', function(req, res) {
 			setTimeout(() => {
 				res.json({ custom: 'response', stat: 'ok' });
-			}, 3000);
+			}, 1000);
 			
 		});
 	}

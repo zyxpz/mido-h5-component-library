@@ -1,7 +1,3 @@
-const loop = () => {
-
-};
-
 export default (opts) => {
 
 	let xhr = '';
@@ -11,7 +7,9 @@ export default (opts) => {
 		data = {},
 		type = 'GET',
 		timeout = 3000,
-		dataType = ''
+		dataType = 'jsonp',
+		header = {},
+		callback = 'handleResponse'
 	} = opts;
 
 	if (window.XMLHttpRequest) { // code for all new browsers
@@ -26,41 +24,39 @@ export default (opts) => {
 	}
 
 	return new Promise((resolve, reject) => {
+		let userData = '';
+
+		Object.keys(data).forEach((it, i) => {
+			if (i === 0) {
+				userData += `?${it}=${data[it]}&`;
+			} else if (i === Object.keys(data).length - 1) {
+				userData += `${it}=${data[it]}`;
+				if (dataType === 'jsonp') {
+					userData += `&callback=${callback}`;
+				}
+			} else {
+				userData += `${it}=${data[it]}&`;
+			}
+		});
+		xhr.timeout = timeout;
 		switch (type) {
 			case 'GET':
 			case 'get':
-				let userData = '';
-				Object.keys(data).forEach((it, i) => {
-					if (i === 0) {
-						userData += `?${it}=${data[it]}&`;
-					} else if (i === Object.keys(data).length - 1) {
-						userData += `${it}=${data[it]}`;
-					} else {
-						userData += `${it}=${data[it]}&`;
-					}
-				});
+			// jsonp跨域
+				if (dataType === 'jsonp') {
+					let script = document.createElement("script");
+					window[callback] = callback;
+					window[callback] = function () {
+						resolve(arguments[0]);
+					};
+					script.src = `${url}${userData}`;
+					document.head.appendChild(script);
+					return false;
+				}
 				xhr.open('GET', `${url}${userData}`, true);
-				// xhr.setRequestHeader('Content-Type', 'text/xml');
-				// xhr.getResponseHeader('Content-Type');
+				setHeader(xhr, header);
 				xhr.send(null);
-				xhr.timeout = timeout;
-				xhr.onreadystatechange = function () {
-					if (xhr.readyState === 4) {
-						if (xhr.status === 200) {
-							try {
-								resolve(JSON.parse(xhr.responseText));
-							} catch (error) {
-								console.log(error);
-							}
-						} else {
-							try {
-								reject(JSON.parse(xhr.responseText));
-							} catch (error) {
-								console.log(error);
-							}
-						}
-					}
-				};
+				xhr.onreadystatechange = onreadyChange(xhr);
 				xhr.ontimeout = function () {
 					reject('请求超时');
 				};
@@ -69,27 +65,36 @@ export default (opts) => {
 			case 'post':
 				xhr.open('POST', opts.url, false);
 				xhr.send(JSON.stringify(data));
-				xhr.onreadystatechange = function () {
-					if (xhr.readyState === 4) {
-						if (xhr.status === 200) {
-							try {
-								resolve(JSON.parse(xhr.responseText));
-							} catch (error) {
-								console.log(error);
-							}
-						} else {
-							try {
-								reject(JSON.parse(xhr.responseText));
-							} catch (error) {
-								console.log(error);
-							}
-						}
-					}
-				};
+				xhr.onreadystatechange = onreadyChange(xhr);
 				break;
 		}
 	});
-	
-
-
 };
+
+// 返回数据
+function onreadyChange(xhr) {
+	if (xhr.readyState === 4) {
+		if (xhr.status === 200) {
+			try {
+				resolve(JSON.parse(xhr.responseText));
+			} catch (error) {
+				console.log(error);
+			}
+		} else {
+			try {
+				reject(JSON.parse(xhr.responseText));
+			} catch (error) {
+				console.log(error);
+			}
+		}
+	}
+}
+
+function setHeader(xhr, headerData) {
+	for (const key in headerData) {
+		if (Object.hasOwnProperty.call(headerData, key)) {
+			xhr.setRequestHeader(key, headerData[key]);
+		}
+	}
+
+}
