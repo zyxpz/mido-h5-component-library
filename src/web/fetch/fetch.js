@@ -7,9 +7,9 @@ export default (opts) => {
 		data = {},
 		type = 'GET',
 		timeout = 3000,
-		dataType = 'jsonp',
+		dataType = '',
 		header = {},
-		callback = 'handleResponse'
+		callback = ''
 	} = opts;
 
 	if (window.XMLHttpRequest) { // code for all new browsers
@@ -27,8 +27,10 @@ export default (opts) => {
 		let userData = '';
 
 		Object.keys(data).forEach((it, i) => {
-			if (i === 0) {
+			if (i === 0 && Object.keys(data).length !== 1) {
 				userData += `?${it}=${data[it]}&`;
+			} else if (i === 0 && Object.keys(data).length === 1) {
+				userData += `?${it}=${data[it]}`;
 			} else if (i === Object.keys(data).length - 1) {
 				userData += `${it}=${data[it]}`;
 				if (dataType === 'jsonp') {
@@ -38,7 +40,7 @@ export default (opts) => {
 				userData += `${it}=${data[it]}&`;
 			}
 		});
-		xhr.timeout = timeout;
+		
 		switch (type) {
 			case 'GET':
 			case 'get':
@@ -54,9 +56,10 @@ export default (opts) => {
 					return false;
 				}
 				xhr.open('GET', `${url}${userData}`, true);
+				xhr.timeout = timeout;
 				setHeader(xhr, header);
 				xhr.send(null);
-				xhr.onreadystatechange = onreadyChange(xhr);
+				xhr.onreadystatechange = onreadyChange(xhr, resolve, reject);
 				xhr.ontimeout = function () {
 					reject('请求超时');
 				};
@@ -64,15 +67,16 @@ export default (opts) => {
 			case 'POST':
 			case 'post':
 				xhr.open('POST', opts.url, false);
+				// xhr.timeout = timeout;
 				xhr.send(JSON.stringify(data));
-				xhr.onreadystatechange = onreadyChange(xhr);
+				xhr.onreadystatechange = onreadyChange(xhr, resolve, reject);
 				break;
 		}
 	});
 };
 
 // 返回数据
-function onreadyChange(xhr) {
+function onreadyChange(xhr, resolve, reject) {
 	if (xhr.readyState === 4) {
 		if (xhr.status === 200) {
 			try {

@@ -93,6 +93,12 @@ const server = new WebpackDevServer(compiler, {
 			}, 1000);
 			
 		});
+		app.post('/post/path.json', function(req, res) {
+			res.json({
+				msg: 'post',
+				stat: 'ok'
+			});
+		});
 	}
 });
 

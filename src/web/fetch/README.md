@@ -6,6 +6,7 @@
 - (未完成)
 	+ cache
 
+- get
 ```js
 fetch({
 	url: 'https://api.douban.com/v2/book/search',
@@ -22,6 +23,24 @@ fetch({
 	.then((d) => {
 		console.log(d);
 		document.querySelector('.J-show').innerHTML = JSON.stringify(d);
+	})
+	.catch((e) => {
+		console.log(e);
+	});
+```
+- post
+```js
+fetch({
+	url: 'http://localhost:9001/post/path.json',
+	data: {
+		post: 1
+	},
+	type: 'post',
+	timeout: 3000,
+	header: {},
+})
+	.then((d) => {
+		console.log(d);
 	})
 	.catch((e) => {
 		console.log(e);
