@@ -1,3 +1,5 @@
+const fs = require('fs-extra');
+
 const webpack = require('webpack');
 
 const WebpackDevServer = require('webpack-dev-server');
@@ -10,7 +12,11 @@ const chalk = require('chalk');
 
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 
-const { entry, webpackHtmls, openPage } = require('./temp.config');
+const {
+	entry,
+	webpackHtmls,
+	openPage
+} = require('./temp.config');
 
 const mockJs = require('../config/mock.config');
 
@@ -30,7 +36,7 @@ console.log('NODE_ENV:', milieu);
 const devConfig = {
 	devtool: 'cheap-module-eval-source-map',
 	mode: milieu,
-	entry, 
+	entry,
 	plugins: [
 		new HtmlWebpackPlugin({
 			template: path.resolve(APP_PATH, 'templates/index.tpl.ejs'),
@@ -77,51 +83,70 @@ config.plugins.push(
 
 const compiler = webpack(config);
 
-const server = new WebpackDevServer(compiler, {
-	contentBase: path.join(__dirname, 'dist'),
-	historyApiFallback: false,
-	hot: true,
-	inline: true,
-	stats: 'none',
-	quiet: true,
-	overlay: true,
-	inline: true,
-	hot: true,
-	compress: true,
-	before: (app) => {
-		mockJs(app);
-	}
-	// before: function(app, server) {
-	// 	app.get('/some/get.json', function(req, res) {
-	// 		setTimeout(() => {
-	// 			res.json({ custom: 'response', stat: 'ok' });
-	// 		}, 1000);
-			
-	// 	});
-	// 	app.post('/some/post.json', function(req, res) {
-	// 		res.json({
-	// 			msg: 'post',
-	// 			stat: 'ok'
-	// 		});
-	// 	});
-	// 	app.delete('/some/delete.json', function(req, res) {
-	// 		res.json({
-	// 			msg: 'delete',
-	// 			stat: 'ok'
-	// 		});
-	// 	});
-	// 	app.put('/some/put.json', function(req, res) {
-	// 		res.json({
-	// 			msg: 'put',
-	// 			stat: 'ok'
-	// 		});
-	// 	});
-	// }
-});
+const dev = () => {
+	const server = new WebpackDevServer(compiler, {
+		contentBase: path.join(__dirname, 'dist'),
+		historyApiFallback: false,
+		hot: true,
+		inline: true,
+		stats: 'none',
+		quiet: true,
+		overlay: true,
+		inline: true,
+		hot: true,
+		compress: true,
+		watchOptions: {
+			aggregateTimeout: 300,
+			poll: 1000,
+			ignored: /node_modules/,
+		},
+		before: (app) => {
+			mockJs(app);
+		}
+		// before: function(app, server) {
+		// 	app.get('/some/get.json', function(req, res) {
+		// 		setTimeout(() => {
+		// 			res.json({ custom: 'response', stat: 'ok' });
+		// 		}, 1000);
+	
+		// 	});
+		// 	app.post('/some/post.json', function(req, res) {
+		// 		res.json({
+		// 			msg: 'post',
+		// 			stat: 'ok'
+		// 		});
+		// 	});
+		// 	app.delete('/some/delete.json', function(req, res) {
+		// 		res.json({
+		// 			msg: 'delete',
+		// 			stat: 'ok'
+		// 		});
+		// 	});
+		// 	app.put('/some/put.json', function(req, res) {
+		// 		res.json({
+		// 			msg: 'put',
+		// 			stat: 'ok'
+		// 		});
+		// 	});
+		// }
+	});
 
-server.listen(port, 'localhost', err => {
-	if (err) {
-		console.error(err);
-		return;
-	}
-});
+	process.stdin.resume();
+
+	['SIGINT', 'SIGTERM'].forEach(signal => {
+		process.on(signal, () => {
+			server.close(() => {
+				process.exit(0);
+			});
+		});
+	});
+
+	server.listen(port, 'localhost', err => {
+		if (err) {
+			console.error(err);
+			return;
+		}
+	});
+};
+
+dev();

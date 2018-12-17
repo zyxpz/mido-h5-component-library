@@ -1,6 +1,6 @@
 module.exports = {
 	'get /some/get.json': (req, res) => {
-		res.json({ custom: 'response', stat: 'ok' });
+		res.jsonp({ custom: 'response', stat: 'ok' });
 	},
 
 	'post /some/post.json': (req, res) => {
@@ -24,7 +24,7 @@ module.exports = {
 		});
 	},
 
-	'put /some/test/get.json': (req, res) => {
+	'get /some/test/get.json': (req, res) => {
 		res.json({
 			msg: 'test get',
 			stat: 'ok'

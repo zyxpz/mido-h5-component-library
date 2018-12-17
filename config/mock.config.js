@@ -1,4 +1,14 @@
-const mockData = require('../mock.config');
+const fs = require('fs-extra');
+
+let mockData = require('../mock.config');
+
+fs.watch(`${process.cwd()}/mock.config.js`, {
+	encoding: 'utf-8'
+}, () => {
+	mockData = mockData;
+});
+
+
 
 let contentArr = [];
 let getArr = [];
@@ -67,5 +77,5 @@ module.exports = function (app) {
 	putArr.forEach(item => {
 		app.put(`${item.path}`, item.content);
 	});
-
 };
+
