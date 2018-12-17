@@ -44,6 +44,7 @@ export default (opts) => {
 		switch (type) {
 			case 'GET':
 			case 'get':
+			default:
 			// jsonp跨域
 				if (dataType === 'jsonp') {
 					let script = document.createElement("script");
@@ -82,7 +83,11 @@ export default (opts) => {
 				break;
 			case 'POST':
 			case 'post':
-				xhr.open('POST', opts.url, true);
+			case 'DELETE':
+			case 'delete':
+			case 'PUT':
+			case 'put':
+				xhr.open(`${type}`, opts.url, true);
 				xhr.send(JSON.stringify(data));
 				xhr.onreadystatechange = function () {
 					if (xhr.readyState === 4) {

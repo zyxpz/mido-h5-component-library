@@ -87,15 +87,27 @@ const server = new WebpackDevServer(compiler, {
 	hot: true,
 	compress: true,
 	before: function(app, server) {
-		app.get('/some/path.json', function(req, res) {
+		app.get('/some/get.json', function(req, res) {
 			setTimeout(() => {
 				res.json({ custom: 'response', stat: 'ok' });
 			}, 1000);
 			
 		});
-		app.post('/post/path.json', function(req, res) {
+		app.post('/some/post.json', function(req, res) {
 			res.json({
 				msg: 'post',
+				stat: 'ok'
+			});
+		});
+		app.delete('/some/delete.json', function(req, res) {
+			res.json({
+				msg: 'delete',
+				stat: 'ok'
+			});
+		});
+		app.put('/some/put.json', function(req, res) {
+			res.json({
+				msg: 'put',
 				stat: 'ok'
 			});
 		});
