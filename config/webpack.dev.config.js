@@ -12,6 +12,8 @@ const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 
 const { entry, webpackHtmls, openPage } = require('./temp.config');
 
+const mockJs = require('../config/mock.config');
+
 const stream = process.stderr;
 
 const {
@@ -86,32 +88,35 @@ const server = new WebpackDevServer(compiler, {
 	inline: true,
 	hot: true,
 	compress: true,
-	before: function(app, server) {
-		app.get('/some/get.json', function(req, res) {
-			setTimeout(() => {
-				res.json({ custom: 'response', stat: 'ok' });
-			}, 1000);
-			
-		});
-		app.post('/some/post.json', function(req, res) {
-			res.json({
-				msg: 'post',
-				stat: 'ok'
-			});
-		});
-		app.delete('/some/delete.json', function(req, res) {
-			res.json({
-				msg: 'delete',
-				stat: 'ok'
-			});
-		});
-		app.put('/some/put.json', function(req, res) {
-			res.json({
-				msg: 'put',
-				stat: 'ok'
-			});
-		});
+	before: (app) => {
+		mockJs(app);
 	}
+	// before: function(app, server) {
+	// 	app.get('/some/get.json', function(req, res) {
+	// 		setTimeout(() => {
+	// 			res.json({ custom: 'response', stat: 'ok' });
+	// 		}, 1000);
+			
+	// 	});
+	// 	app.post('/some/post.json', function(req, res) {
+	// 		res.json({
+	// 			msg: 'post',
+	// 			stat: 'ok'
+	// 		});
+	// 	});
+	// 	app.delete('/some/delete.json', function(req, res) {
+	// 		res.json({
+	// 			msg: 'delete',
+	// 			stat: 'ok'
+	// 		});
+	// 	});
+	// 	app.put('/some/put.json', function(req, res) {
+	// 		res.json({
+	// 			msg: 'put',
+	// 			stat: 'ok'
+	// 		});
+	// 	});
+	// }
 });
 
 server.listen(port, 'localhost', err => {

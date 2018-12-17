@@ -73,3 +73,23 @@ fetch({
 	.catch((e) => {
 		console.log(e);
 	});
+
+
+// test get
+fetch({
+	url: 'http://localhost:9001/some/test/get.json',
+	data: {
+		get: 1,
+		t: 2
+	},
+	type: 'get',
+	timeout: 3000,
+	header: {},
+})
+	.then((d) => {
+		console.log(d, 'test');
+		// document.querySelector('.J-show-get').innerHTML = JSON.stringify(d);
+	})
+	.catch((e) => {
+		console.log(e);
+	});
