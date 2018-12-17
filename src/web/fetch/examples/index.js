@@ -6,7 +6,8 @@ fetch({
 	url: 'http://localhost:9001/some/get.json',
 	data: {
 		get: 1,
-		t: 2
+		t: 2,
+		c: 3
 	},
 	type: 'get',
 	timeout: 3000,

@@ -2,11 +2,15 @@ const fs = require('fs-extra');
 
 let mockData = require('../mock.config');
 
-fs.watch(`${process.cwd()}/mock.config.js`, {
-	encoding: 'utf-8'
-}, () => {
-	mockData = mockData;
+process.on('message', (msg) => {
+	fs.watch(`${process.cwd()}/mock.config.js`, {
+		encoding: 'utf-8'
+	}, () => {
+		process.send('mockchange');
+	});
 });
+
+
 
 
 
@@ -26,7 +30,6 @@ module.exports = function (app) {
 			if (typeof content !== 'function') {
 				throw new Error('no function');
 			}
-			// console.log(key, content);
 			data = {
 				path: key,
 				content
