@@ -17,7 +17,7 @@
     "start": "npm run user-setting && npm run dev",
     "dev": "npm run all",
     "user-setting": "node ./config/user.setting.config.js",
-    "sever": "npm run tsconfig-dev && node ./config/webpack.dev.config.js",
+    "sever": "npm run tsconfig-dev && node ./config/dev.server.js",
     "lint": "esw ./config/*.config.* ./src/**/*.js",
     "lint:fix": "npm run lint -- --fix",
     "lint:watch": "npm run lint -- --fix --watch",
