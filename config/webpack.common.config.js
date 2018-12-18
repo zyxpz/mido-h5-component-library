@@ -107,6 +107,10 @@ const config = {
 		{
 			test: /\.html$/i,
 			use: 'html-loader'
+		},
+		{
+			test: /\.atpl?$/,
+			use: 'atpl-loader'
 		}
 		]
 	},

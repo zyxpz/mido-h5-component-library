@@ -39,6 +39,7 @@
     "mido-less-general": "^1.0.4"
   },
   "devDependencies": {
+    "atpl-loader": "^0.2.0",
     "autoprefixer": "^9.3.1",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
