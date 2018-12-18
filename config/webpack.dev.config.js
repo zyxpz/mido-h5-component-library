@@ -83,7 +83,6 @@ config.plugins.push(
 
 const compiler = webpack(config);
 
-// const dev = () => {
 const server = new WebpackDevServer(compiler, {
 	contentBase: path.join(__dirname, 'dist'),
 	historyApiFallback: false,
@@ -141,14 +140,13 @@ process.stdin.resume();
 	});
 });
 
-process.on('message', () => {
-	server.close();
-});
-
 server.listen(port, 'localhost', err => {
 	if (err) {
 		console.error(err);
 		return;
 	}
 });
-// };
+
+process.on('message', () => {
+	server.close();
+});

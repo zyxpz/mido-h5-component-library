@@ -1,7 +1,7 @@
 module.exports = {
 	'get /some/get.json': (req, res) => {
 		console.log(req.query);
-		res.jsonp({ custom: 'response', stat: 'osk' });
+		res.jsonp({ custom: 'response', stat: 'ok' });
 	},
 
 	'post /some/post.json': (req, res) => {
