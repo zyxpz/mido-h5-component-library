@@ -1,4 +1,4 @@
-export default (opts) => {
+export default async (opts) => {
 
 	let xhr = '';
 
@@ -23,7 +23,7 @@ export default (opts) => {
 		return false;
 	}
 
-	return new Promise((resolve, reject) => {
+	const returnData = await new Promise((resolve, reject) => {
 		let userData = '';
 
 		Object.keys(data).forEach((it, i) => {
@@ -112,6 +112,7 @@ export default (opts) => {
 				break;
 		}
 	});
+	return returnData;
 };
 
 function setHeader(xhr, headerData) {

@@ -1,4 +1,4 @@
-const  copy = (opts) => {
+const  copy = async (opts) => {
 	const {
 		copyWrap = '',
 		dataType = 'value'
@@ -7,7 +7,7 @@ const  copy = (opts) => {
 		// create
 		let input = document.createElement('input');
 
-		input.value = document.querySelector(`.${copyWrap}`)[dataType];
+		input.value = await document.querySelector(`.${copyWrap}`)[dataType];
 		
 		document.body.appendChild(input);
 
