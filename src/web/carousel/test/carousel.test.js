@@ -1,8 +1,5 @@
-import expect from 'expect';
-
-import {
-	Carousel
-} from '../../../main';
+const expect = require('expect');
+const { Carousel } = require('../../../../lib/main');
 
 describe('carousel', () => {
 	it('创建', () => {

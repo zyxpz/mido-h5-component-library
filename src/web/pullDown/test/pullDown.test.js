@@ -1,7 +1,7 @@
-import expect from 'expect';
-import { PullDown } from '../../../main';
+const expect = require('expect');
+const { PullDown } = require('../../../../lib/main');
 
-describe('demo', () => {
+describe('PullDown', () => {
 	it('调用', () => {
 		expect(new PullDown());
 	});
