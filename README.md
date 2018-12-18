@@ -31,6 +31,7 @@ import { Carousel } from 'mido-h5-cp';
 ## 组件
 - [轮播图](https://github.com/zyxpz/mido-h5-cp/tree/master/src/web/carousel)
 - [上拉刷新下拉加载](https://github.com/zyxpz/mido-h5-cp/tree/master/src/web/pullDown)
+- [copy](https://github.com/zyxpz/mido-h5-cp/tree/master/src/web/copy)
 
 ## 通用方法
 - [获取值](https://github.com/zyxpz/mido-h5-cp/tree/master/src/web/findData)
