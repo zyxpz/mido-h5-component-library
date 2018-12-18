@@ -1,7 +1,7 @@
 const expect = require('expect');
 const { fetch } = require('../../../../lib/main');
  
-describe('findData', () => {
+describe('fetch', () => {
 	console.log('test');
 	it('调用', () => {
 		expect(fetch({

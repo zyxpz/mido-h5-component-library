@@ -3,6 +3,7 @@
 
 - get
 ```js
+import { fetch } from 'mido-h5-cp';
 fetch({
 	url: 'https://api.douban.com/v2/book/search',
 	data: {
@@ -25,6 +26,7 @@ fetch({
 ```
 - post
 ```js
+import { fetch } from 'mido-h5-cp';
 fetch({
 	url: 'http://localhost:9001/post/path.json',
 	data: {
@@ -43,6 +45,7 @@ fetch({
 ```
 - delete
 ```js
+import { fetch } from 'mido-h5-cp';
 fetch({
 	url: 'http://localhost:9001/some/delete.json',
 	data: {
@@ -63,6 +66,7 @@ fetch({
 
 - put
 ```js
+import { fetch } from 'mido-h5-cp';
 fetch({
 	url: 'http://localhost:9001/some/put.json',
 	data: {
