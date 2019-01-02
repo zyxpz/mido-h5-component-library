@@ -26,16 +26,16 @@ npm install babel-plugin-import --save-dev
 ```
 - 使用
 ```js
-import { Carousel } from 'mido-h5-cp';
+import { xxx } from 'mido-h5-cp';
 ```
 ## 组件
 - [轮播图](https://github.com/zyxpz/mido-h5-cp/tree/master/src/web/carousel)
 - [上拉刷新下拉加载](https://github.com/zyxpz/mido-h5-cp/tree/master/src/web/pullDown)
 - [copy](https://github.com/zyxpz/mido-h5-cp/tree/master/src/web/copy)
-- [若提示(toast)](https://github.com/zyxpz/mido-h5-cp/tree/master/src/web/toast)
+- [弱提示(toast)](https://github.com/zyxpz/mido-h5-cp/tree/master/src/web/toast)
 
 ## 通用方法
 - [获取值](https://github.com/zyxpz/mido-h5-cp/tree/master/src/web/findData)
 - [fetch](https://github.com/zyxpz/mido-h5-cp/tree/master/src/web/fetch)
-- [getUrlData](https://github.com/zyxpz/mido-h5-cp/tree/master/src/web/getUrlData)
+- [getUrlData](https://github.com/zyxpz/mido-h5-cp/tree/master/src/web/geturldata)
 - [htmlJson](https://github.com/zyxpz/mido-h5-cp/tree/master/src/web/htmlJson)
