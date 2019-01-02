@@ -6,3 +6,4 @@ export copy from './web/copy/index';
 export toast from './web/toast/index';
 export getUrlData from './web/getUrlData/index';
 export htmlJson from './web/htmlJson/index';
+export Resizer from './web/resizer/index';
