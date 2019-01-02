@@ -38,3 +38,4 @@ import { Carousel } from 'mido-h5-cp';
 - [获取值](https://github.com/zyxpz/mido-h5-cp/tree/master/src/web/findData)
 - [fetch](https://github.com/zyxpz/mido-h5-cp/tree/master/src/web/fetch)
 - [getUrlData](https://github.com/zyxpz/mido-h5-cp/tree/master/src/web/getUrlData)
+- [htmlJson](https://github.com/zyxpz/mido-h5-cp/tree/master/src/web/htmlJson)
