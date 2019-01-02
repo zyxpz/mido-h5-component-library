@@ -153,6 +153,9 @@ const config = {
 		new MiniCssExtractPlugin({
 			filename: '[name].[hash:8].css',
 			allChunks: true
+		}),
+		new webpack.ProvidePlugin({
+			$: 'anima-yocto'
 		})
 	]
 };

@@ -1,0 +1,12 @@
+<div class="J-toast-wrap toast-wrap"
+style = "
+  <%if(top){%>
+    top:<%=top%>;
+  <%}%>
+  <%if(left){%>
+    left:<%=left%>;
+  <%}%>
+"
+>
+  <%=tpl%>
+</div>

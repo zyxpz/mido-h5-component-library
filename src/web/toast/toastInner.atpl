@@ -1,0 +1,21 @@
+<div class="toast-inner"
+  style="
+    <%if(width){%>
+      width:<%=width%>;
+    <%}%>
+    <%if(height){%>
+      height:<%=height%>;
+    <%}%>
+    <%if(radius){%>
+      border-radius:<%=radius%>;
+    <%}%>
+    <%if(backgroundColor){%>
+      background:<%=backgroundColor%>;
+    <%}%>
+  "
+>
+    <div class="<%if(img){%>img<%}else{%>iconfont <%=imgClass%><%}%>" 
+      <%if(img){%>style="background-image: url(<%=img%>);<%}%>">
+    </div>
+  <div class="text"><%=text || toastText%></div>
+</div>
