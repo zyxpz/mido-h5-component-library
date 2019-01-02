@@ -4,6 +4,40 @@
 npm install mido-h5-cp --save
 ```
 
+## 依赖,使用模板引擎anima-template,需要在webpack引入atpl-loader
+```vim
+npm install atpl-loader --save-dev
+```
+- 配置
+```vim
+module: {
+		rules: [
+		{
+			test: /\.atpl?$/,
+			use: 'atpl-loader'
+		}
+		]
+	},
+```
+
+## 依赖less,需要在webpack引入less-loader
+```vim
+npm install less less-loader --save-dev
+```
+```vim
+module: {
+		rules: [
+		{
+			test: /\.less$/,
+			use: [
+				'css-loader',
+				'less-loader',
+			],
+		}
+		]
+	},
+```
+
 ## 使用方式 => 按需加载，需要安装 `babel-plugin-import`
 ```vim
 npm install babel-plugin-import --save-dev
@@ -17,7 +51,8 @@ npm install babel-plugin-import --save-dev
 			[
 				{
 					"libraryName": "mido-h5-cp",
-					"libraryDirectory": "lib/"
+					"libraryDirectory": "lib/web",
+					"camel2DashComponentName": false
 				}
 			]
 		]
