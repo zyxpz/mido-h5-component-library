@@ -1,7 +1,6 @@
 import { toast } from '../../../main';
-import './index.less';
 import toastTpl from '../toastInner.atpl';
-
+import './index.less';
 
 document.querySelector('.J-btn').addEventListener('click', () => {
 	toast.show({

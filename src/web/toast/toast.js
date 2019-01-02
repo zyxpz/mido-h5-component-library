@@ -1,6 +1,7 @@
 import toastTpl from './toast.atpl';
 import toasInnertTpl from './toastInner.atpl';
 import 'mido-less-general/lib/index.js';
+import './index.less';
 
 function loop() {};
 
