@@ -1,6 +1,6 @@
 {
   "name": "mido-h5-cp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "h5组件库和一些公用方法",
   "main": "lib/main.js",
   "entry": {

@@ -88,6 +88,7 @@ export default async (opts) => {
 			case 'PUT':
 			case 'put':
 				xhr.open(`${type}`, opts.url, true);
+				setHeader(xhr, header);
 				xhr.send(JSON.stringify(data));
 				xhr.onreadystatechange = function () {
 					if (xhr.readyState === 4) {
