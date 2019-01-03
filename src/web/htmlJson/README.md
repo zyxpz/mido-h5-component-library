@@ -10,7 +10,7 @@ const json = {
 
 const jsonData = htmlJson(json);
 
-console.log(urlData);
+console.log(jsonData);
 ```
 
 - [效果](https://zyxpz.github.io/mido-h5-cp/dist/web/htmlJson/Basic)
