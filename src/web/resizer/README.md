@@ -18,4 +18,4 @@ const resize = new Resizer({
 resize.init();
 ```
 
-## [效果]((https://zyxpz.github.io/mido-h5-cp/dist/web/resizer/Basic))
+## [效果](https://zyxpz.github.io/mido-h5-cp/dist/web/resizer/Basic)
