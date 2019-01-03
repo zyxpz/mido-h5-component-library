@@ -22,7 +22,6 @@ const toast = {
 		// 没有传模板用默认模板
 		if (!tpl) {
 			let imgClass = '', toastText = '';
-			console.log(type, 'type');
 			switch (type) {
 				case 'reqOk':
 					imgClass = 'icon-chenggong';
