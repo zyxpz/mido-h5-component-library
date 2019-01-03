@@ -282,6 +282,13 @@ pre {
   color: red;
 }
 
+.resizing {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
 *,
 *:before,
 *:after {
@@ -391,84 +398,5 @@ button {
 }
 input {
   line-height: normal;
-}
-/**  -- 宽 -- **/
-/**  -- 宽 -- **/
-/**  -- 高 -- **/
-/**  -- 高 -- **/
-/**  -- 内间距 -- **/
-/**  -- 内间距 -- **/
-/**  -- 外间距 -- **/
-/**  -- 外间距 -- **/
-/**  -- border -- **/
-/**  -- border -- **/
-/** -- rect type -- **/
-/** -- rect type -- **/
-/**  -- flex 布局相关 -- **/
-.box-direction-column {
-  flex-direction: column;
-}
-.box-pack-center {
-  justify-content: center;
-}
-/**  -- 定位相关-- **/
-/**  -- flex 布局相关 -- **/
-/** -- 文字截断 ...-- **/
-/** -- 文字截断 ...-- **/
-/** -- 多行文字截断 ...-- **/
-/** -- 多行文字截断 ...-- **/
-/* -- 1px line -- */
-/* -- 1px line -- */
-/* -- 底部线 -- */
-/* -- 底部线 -- */
-/* -- 顶部线 -- */
-/* -- 顶部线 -- */
-/* -- 按钮按下效果 -- */
-/* -- 按钮按下效果 -- */
-/* -- 卡片背景图 -- */
-/* -- 卡片背景图 -- */
-/* -- 滑动 -- */
-.scroll-touch {
-  display: flex;
-  box-sizing: border-box;
-  white-space: nowrap;
-  overflow-x: auto;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
-}
-.scroll-touch::-webkit-scrollbar {
-  display: none!important;
-}
-/* -- 滑动 -- */
-/* -- 清除浮动 -- */
-/* -- 清除浮动 -- */
-/* -- 隐藏 -- */
-.none {
-  display: none!important;
-}
-/* -- 隐藏 -- */
-/* -- 动画相关 -- */
-.wrap {
-  display: flex;
-  width: 100%;
-  height: 100%;
-}
-.line {
-  cursor: col-resize;
-  width: 11px;
-  margin: 0 -5px;
-  border-left: 5px solid hsla(0, 0%, 100%, 0);
-  border-right: 5px solid hsla(0, 0%, 100%, 0);
-}
-.left,
-.right {
-  width: 500px;
-  height: 100%;
-}
-.left {
-  background-color: red;
-}
-.right {
-  background-color: blue;
 }
 

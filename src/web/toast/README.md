@@ -18,5 +18,6 @@ toast({
   text: '', // 默认模板自定义文字
   tpl: 传入的模板({需要传的参数}), //需要传的模板， 不传的话默认为原始，直接在外层传入需要的图片或文字
 })
+```
 
 ## [效果](https://zyxpz.github.io/mido-h5-cp/dist/web/toast/Basic)

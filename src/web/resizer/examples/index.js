@@ -9,7 +9,6 @@ const resize = new Resizer({
 	resize(x) {
 		const leftWrap = document.querySelector('.left');
 		const leftWidth = leftWrap.scrollWidth;
-		console.log(leftWidth, 'leftWidth');
 		leftWrap.style.cssText = `width: ${leftWidth + x}px;`;
 	}
 });
