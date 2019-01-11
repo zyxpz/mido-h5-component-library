@@ -6,6 +6,7 @@ import './index.less';
 function loop() {};
 
 const toast = {
+	closeToast: loop,
 	init: function(opts) {
 		this.event(opts);
 	},
@@ -16,13 +17,14 @@ const toast = {
 			type = '',
 			img = '',
 			text = '',
+			closeToast = loop,
 		} = opts;
+		this.closeToast = closeToast;
 		const toastWrap = $('.J-toast-wrap');
 
 		// 没有传模板用默认模板
 		if (!tpl) {
 			let imgClass = '', toastText = '';
-			console.log(type, 'type');
 			switch (type) {
 				case 'reqOk':
 					imgClass = 'icon-chenggong';
@@ -51,27 +53,28 @@ const toast = {
 	},
 
 	event: function(opts) {
+		const self = this;
 		const {
 			autoDisappear = true,
 			time = 2000,
+			wrap = '',
 		} = opts;
-		const self = this;
+		wrap.on('click', '.J-toast-wrap', () => {
+			self.hide();
+		});
 
 		// 提示是否会自动消失
 		if (autoDisappear) {
 			setTimeout(() => {
-				self.hide(opts);
+				self.hide();
 			}, time);
 		}
 	},
 
-	hide: function(opts) {
-		const {
-			closeToast = loop,
-		} = opts;
+	hide: function() {
 		const toastWrap = $('.J-toast-wrap');
 		toastWrap.remove();
-		closeToast();
+		this.closeToast();
 	}
 };
 
