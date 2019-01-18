@@ -1,30 +1,36 @@
 const fs = require('fs-extra');
 
-let port = '';
+fs.access('./config/user.config.js', fs.constants.F_OK, (err) => {
+	if (err) {
+		let port = '';
 
-process.stdout.write('port: ');
+		process.stdout.write('port: ');
 
-// process.stdin.pipe(process.stdout);
+		// process.stdin.pipe(process.stdout);
 
-process.stdin.on('data', (chunk) => {
+		process.stdin.on('data', (chunk) => {
 
-	// 输入
-	port = Number(chunk);
+			// 输入
+			port = Number(chunk);
 
-	if (isNaN(port)) {
-		console.log('端口号为数字。');
-		return false;
-	}
+			if (isNaN(port)) {
+				console.log('端口号为数字。');
+				return false;
+			}
 
-	let contents = '';
+			let contents = '';
 
-	// 输出
-	contents = `
+			// 输出
+			contents = `
   const obj = {port: ${port}};
   
   module.exports = obj;
   `;
-	fs.outputFileSync('./config/user.config.js', contents);
-  
-	process.exit(0);
+			fs.outputFileSync('./config/user.config.js', contents);
+
+			process.exit(0);
+		});
+	} else {
+		process.exit(0);
+	}
 });
