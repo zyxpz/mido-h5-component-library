@@ -21,7 +21,7 @@
     "lint": "esw ./config/*.config.* ./src/**/*.js",
     "lint:fix": "npm run lint -- --fix",
     "lint:watch": "npm run lint -- --fix --watch",
-    "lint:style": "stylelint --fix --syntax less src",
+    "lint:style": "stylelint --fix --syntax less src/**/*.less",
     "lint-staged": "lint-staged",
     "all": "npm-run-all --parallel --race --continue-on-error lint:watch sever",
     "lib": "rm -rf ./lib && npm run tslib && babel src --out-dir lib --copy-files --ignore **.test.js,**.md,examples/**",
