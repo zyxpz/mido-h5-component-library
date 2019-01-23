@@ -48,13 +48,11 @@ npm install babel-plugin-import --save-dev
 	"plugins": [
 		[
 			"import",
-			[
 				{
 					"libraryName": "mido-h5-cp",
 					"libraryDirectory": "lib/web",
 					"camel2DashComponentName": false
 				}
-			]
 		]
 	]
 }
