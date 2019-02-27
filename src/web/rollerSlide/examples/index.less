@@ -1,0 +1,27 @@
+@import '~mido-less-general/lib/themes/reset.less';
+
+body {
+	overflow: hidden;
+}
+.wrap {
+	width: 100%;
+	height: 100%;
+
+	div {
+		width: 100%;
+		height: 100%;
+		text-align: center;
+		font-size: 32px;
+		display: flex;
+		justify-content: center;
+		align-items: Center;
+
+		&:nth-of-type(odd) {
+			background-color: red;
+		}
+
+		&:nth-of-type(even) {
+			background-color: blue;
+		}
+	}
+}
