@@ -10,6 +10,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const webpackMerge = require('webpack-merge');
 
+let LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
+
 const milieu = process.env.NODE_ENV || 'development';
 
 const {
@@ -156,7 +158,8 @@ const config = {
 		}),
 		new webpack.ProvidePlugin({
 			$: 'anima-yocto'
-		})
+		}),
+		new LodashModuleReplacementPlugin()
 	]
 };
 

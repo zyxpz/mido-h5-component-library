@@ -26,6 +26,9 @@
         "libraryName": "mido-h5-cp",
         "libraryDirectory": "lib/"
       }]
+    ],
+    [
+      "lodash"
     ]
   ]
 }
