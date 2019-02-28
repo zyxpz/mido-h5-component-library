@@ -1,10 +1,11 @@
-import {
-	htmlJson
-} from '../../../main';
+import('../../../main')
+	.then(({ htmlJson }) => {
+		const obj = {
+			a: 'Hello',
+			b: 'World'
+		};
 
-const obj = {
-	a: 'Hello',
-	b: 'World'
-};
+		document.querySelector('.J-content').innerHTML = htmlJson(obj);
+	});
 
-document.querySelector('.J-content').innerHTML = htmlJson(obj);
+

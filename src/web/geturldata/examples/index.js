@@ -1,6 +1,9 @@
-import { getUrlData, htmlJson  } from '../../../main';
+import('../../../main')
+	.then(({ getUrlData, htmlJson }) => {
 
-const data = getUrlData();
+		const data = getUrlData();
 
 
-document.querySelector('.J-content').innerHTML = htmlJson(data);
+		document.querySelector('.J-content').innerHTML = htmlJson(data);
+
+	});

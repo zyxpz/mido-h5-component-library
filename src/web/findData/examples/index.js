@@ -1,5 +1,4 @@
 import './index.less';
-import { findData } from '../../../main';
 
 const path = 'a[0].b.c[0].d.e';
 
@@ -34,10 +33,14 @@ dataWrap.value = JSON.stringify(data);
 
 dataInput.value = path;
 
-document.querySelector('.J-data-btn').addEventListener('click', () => {
-	const data = JSON.parse(dataWrap.value);
-	const path = dataInput.value;
-	const show = JSON.stringify(findData(data, path));
-	dataShow.innerText = show;
-	dataShow.style.color = 'red';
-});
+import('../../../main')
+	.then(({ findData }) => {
+		document.querySelector('.J-data-btn').addEventListener('click', () => {
+			const data = JSON.parse(dataWrap.value);
+			const path = dataInput.value;
+			const show = JSON.stringify(findData(data, path));
+			dataShow.innerText = show;
+			dataShow.style.color = 'red';
+		});
+	});
+

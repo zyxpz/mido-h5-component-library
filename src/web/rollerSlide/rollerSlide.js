@@ -1,4 +1,3 @@
-import { debounce } from 'lodash';
 export default class RollerSlide {
 	constructor(opts) {
 		this._wrap = opts.wrap;
@@ -39,10 +38,7 @@ export default class RollerSlide {
 
 	// 移动事件
 	handleMoveEvent = () => {
-		this._wrap.addEventListener(this.mousewheel, debounce(this.handleMouseWhell, 300, {
-			'leading': true,
-			'trailing': false
-		}));
+		this._wrap.addEventListener(this.mousewheel, this.handleMouseWhell);
 	}
 
 	// 监听动画是否结束
