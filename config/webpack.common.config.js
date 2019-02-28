@@ -46,7 +46,7 @@ const config = {
 		/**
 		 * html引用路径
 		 */
-		publicPath: milieu === 'production' ? '/mido-h5-cp/dist' : '/'
+		publicPath: milieu === 'production' ? '/mido-h5-cp/dist/' : '/'
 	},
 	module: {
 		rules: [{
