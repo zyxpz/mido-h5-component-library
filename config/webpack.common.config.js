@@ -38,7 +38,6 @@ const config = {
 		extensions: ['.js', 'jsx', '.vue', 'ts', '.json', '.less', '.css'],
 		alias: {}
 	},
-	entry,
 	output: {
 		path: path.resolve(APP_PATH, 'dist'),
 		filename: '[name].[hash:8].js', // 每个页面对应的主js的生成配置

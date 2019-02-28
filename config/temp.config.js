@@ -47,7 +47,7 @@ const getEntryFile = (dir) => {
 			if (fileExtName === '.html') {
 				let filename = '';
 				if (milieu === 'production') {
-					filename = filePath.replace(/src/, 'dist').replace(/examples\//, '');
+					filename = filePath.replace(/src/, 'dist/').replace(/examples\//, '');
 				} else {
 					filename = cpName;
 				}
