@@ -10,6 +10,8 @@ export default class RollerSlide {
 
 		this.flag = 5;
 
+		this.target = null;
+
 	}
 
 	init = () => {
@@ -32,28 +34,32 @@ export default class RollerSlide {
 				e.setAttribute('data-tap', (i - 1) / 2);
 			}
 		});
-
+		this.handleChildClassName(this.index);
 		this.handleMoveEvent();
+	}
+
+	// 子元素加类
+	handleChildClassName = (index) => {
+		this._wrap.childNodes.forEach(e => {
+			if (e.nodeType === 1) {
+				if (parseInt(e.getAttribute('data-tap')) === index) {
+					e.className = e.className.replace(/J-whell/, '');
+					e.className += ' J-whell';
+					this.handleMoveEvent();
+				} else {
+					e.className = e.className.replace(/\s+J-whell/, '');
+				}
+			}
+		});
 	}
 
 	// 移动事件
 	handleMoveEvent = () => {
-		this._wrap.addEventListener(this.mousewheel, this.handleMouseWhell);
+		document.querySelector('.J-whell').addEventListener(this.mousewheel, this.handleMouseWhell);
 	}
-
-	// 监听动画是否结束
-	// handleAnimationEnd = () => {
-	// 	this.isMove = true;
-	// }
-
 
 	// 滚轮事件
 	handleMouseWhell = (e) => {
-		if (e.stopPropagation) e.stopPropagation();
-		else e.cancelBubble = true;
-		if (e.preventDefault) e.preventDefault();
-		else e.returnValue = false;
-
 		this.startTime = this.endTime;
 
 		this.endTime = new Date().getTime();
@@ -61,35 +67,31 @@ export default class RollerSlide {
 		let delta = (e.wheelDeltaY && (e.wheelDeltaY > 0 ? 1 : -1)) ||
 			(e.detail && (e.detailY > 0 ? -1 : 1));
 
-		console.log(this.endTime - this.startTime);
-
-		if (this.endTime - this.startTime <= 300) {
-			if (delta < 0 && delta != this.flag) {
-				console.log("1");
+		if (this.target !== e.currentTarget) {
+			this.target = e.currentTarget;
+			if (delta < 0) {
 				this.next();
 				this.flag = delta;
-			} else if (delta > 0 && delta != this.flag) {
-				console.log("2");
+			} else {
 				this.last();
 				this.flag = delta;
 			};
 		} else {
-			if (delta < 0) {
-				console.log("3");
-				this.next();
-				this.flag = delta;
-			} else {
-				console.log("4");
-				this.last();
-				this.flag = delta;
-			};
-		};
-
-
+			if (this.endTime - this.startTime <= 300) {
+				if (delta < 0 && delta != this.flag) {
+					this.next();
+					this.flag = delta;
+				} else if (delta > 0 && delta != this.flag) {
+					this.last();
+					this.flag = delta;
+				};
+			}
+		}
 	}
 
 	handleWrapScroll = (index) => {
 		this._wrap.style.cssText = `transform: translate3d(0, -${index * this.warpH}px, 0); transition: transform .5s`;
+		this.handleChildClassName(index);
 	}
 
 	// 下一个
