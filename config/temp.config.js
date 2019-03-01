@@ -48,7 +48,6 @@ const getEntryFile = (dir) => {
 				let filename = '';
 				if (milieu === 'production') {
 					filename = filePath.replace(/src/, 'dist').replace(/examples\//, '');
-					console.log(filename, 'filename');
 				} else {
 					filename = cpName;
 				}

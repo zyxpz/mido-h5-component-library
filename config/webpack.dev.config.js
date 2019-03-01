@@ -34,13 +34,13 @@ const {
 console.log('NODE_ENV:', milieu);
 
 // entry
-Object.getOwnPropertyNames((entry || {})).map(name => {
-	entry[name] = []
-	// 添加HMR文件
-		.concat("webpack/hot/dev-server")
-		.concat(`webpack-dev-server/client?http://localhost:${port}`)
-		.concat(entry[name]);
-});
+// Object.getOwnPropertyNames((entry || {})).map(name => {
+// 	entry[name] = []
+// 	// 添加HMR文件
+// 		.concat("webpack/hot/dev-server")
+// 		.concat(`webpack-dev-server/client?http://localhost:${port}`)
+// 		.concat(entry[name]);
+// });
 
 const devConfig = {
 	devtool: 'cheap-module-eval-source-map',
@@ -57,7 +57,7 @@ const devConfig = {
 			openPage: openPage
 		}),
 		...webpackHtmls,
-		new webpack.HotModuleReplacementPlugin()
+		// new webpack.HotModuleReplacementPlugin()
 	]
 };
 

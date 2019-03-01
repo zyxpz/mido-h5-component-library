@@ -12,6 +12,10 @@ const webpackMerge = require('webpack-merge');
 
 let LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+
 const milieu = process.env.NODE_ENV || 'development';
 
 const {
@@ -116,7 +120,11 @@ const config = {
 		]
 	},
 	optimization: {
-		minimize: milieu === 'production' ? true : false,
+		// minimize: milieu === 'production' ? true : false,
+		minimizer: [
+			new OptimizeCSSAssetsPlugin(),
+			new UglifyJsPlugin()
+		],
 		// 原：NamedModulesPlugin()
 		namedModules: true,
 		// 原：NoEmitOnErrorsPlugin() - 异常继续执行
