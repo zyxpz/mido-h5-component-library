@@ -67,7 +67,7 @@ import { xxx } from 'mido-h5-cp';
 - [copy](https://github.com/zyxpz/mido-h5-cp/tree/master/src/web/copy)
 - [弱提示(toast)](https://github.com/zyxpz/mido-h5-cp/tree/master/src/web/toast)
 - [resize](https://github.com/zyxpz/mido-h5-cp/tree/master/src/web/resizer)
-- [鼠标滚轮时间](https://github.com/zyxpz/mido-h5-cp/tree/master/src/web/rollerSlide)
+- [鼠标滚轮事件](https://github.com/zyxpz/mido-h5-cp/tree/master/src/web/rollerSlide)
 
 ## 通用方法
 - [获取值](https://github.com/zyxpz/mido-h5-cp/tree/master/src/web/findData)
