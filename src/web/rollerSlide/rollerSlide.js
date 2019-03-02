@@ -31,7 +31,7 @@ export default class RollerSlide {
 		this._wrap.childNodes.forEach((e, i) => {
 			if (e.nodeType === 1) {
 				e.style.height = `${this.warpH}px`;
-				e.setAttribute('data-tap', (i - 1) / 2);
+				e.setAttribute('data-tap', i);
 			}
 		});
 		this.handleChildClassName(this.index);
