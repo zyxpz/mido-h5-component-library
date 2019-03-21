@@ -1,6 +1,6 @@
 import('../../../main')
-	.then(({ Picker }) => {
-		const picker = new Picker({
+	.then(({ DatePicker }) => {
+		const picker = new DatePicker({
 			mode: 'time'
 		});
     

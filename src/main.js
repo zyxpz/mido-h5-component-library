@@ -9,4 +9,4 @@ export getUrlData from './web/getUrlData/index';
 export htmlJson from './web/htmlJson/index';
 export Resizer from './web/resizer/index';
 export RollerSlide from './web/rollerSlide/index';
-export Picker from './web/Picker/index';
+export DatePicker from './web/DatePicker/index';
