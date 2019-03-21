@@ -3,14 +3,14 @@ import toasInnertTpl from './toastInner.atpl';
 import 'mido-less-general/lib/index.js';
 import './index.less';
 
-function loop() {};
+function loop() { };
 
 const toast = {
 	closeToast: loop,
-	init: function(opts) {
+	init: function (opts) {
 		this.event(opts);
 	},
-	show: function(opts) {
+	show: function (opts) {
 		const {
 			wrap = '',
 			tpl = '',
@@ -44,15 +44,13 @@ const toast = {
 			opts.tpl = `${toasInnertTpl(opts)}`;
 		}
 
-		if (toastWrap.length) {
+		if (!toastWrap.length) {
 			toastWrap.html(toastTpl(opts));
-		} else {
-			wrap.append(toastTpl(opts));
 		}
 		this.init(opts);
 	},
 
-	event: function(opts) {
+	event: function (opts) {
 		const self = this;
 		const {
 			autoDisappear = true,
@@ -71,7 +69,7 @@ const toast = {
 		}
 	},
 
-	hide: function() {
+	hide: function () {
 		const toastWrap = $('.J-toast-wrap');
 		toastWrap.remove();
 		this.closeToast();

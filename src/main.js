@@ -9,3 +9,4 @@ export getUrlData from './web/getUrlData/index';
 export htmlJson from './web/htmlJson/index';
 export Resizer from './web/resizer/index';
 export RollerSlide from './web/rollerSlide/index';
+export Tab from './web/tab/index';

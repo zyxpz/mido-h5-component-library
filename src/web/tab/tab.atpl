@@ -1,0 +1,15 @@
+
+<div class="wrap J-wrap <%if(direction && direction!== "top"){%>direction-wrap <%=direction%>-wrap<%}%>">
+  <div class="J-tap-slide tap-slide">
+    <div class="tap-content J-tap-content" style="color: <%=color%>;font-size: <%=size%>;">
+      <%=tabListDom%>
+    </div>
+  </div>
+  <div class="list-content J-list-content">
+    <%=contentDom%>
+  </div>
+</div>
+
+
+
+

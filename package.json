@@ -37,8 +37,10 @@
   "license": "ISC",
   "dependencies": {
     "anima-yocto": "^2.0.3",
+    "fs": "^0.0.1-security",
     "lodash": "^4.17.11",
-    "mido-less-general": "^1.0.4"
+    "mido-less-general": "^1.0.4",
+    "rx": "^4.1.0"
   },
   "devDependencies": {
     "atpl-loader": "^0.2.0",
@@ -65,6 +67,7 @@
     "eslint-watch": "^4.0.2",
     "expect": "^23.6.0",
     "friendly-errors-webpack-plugin": "^1.7.0",
+    "fs": "^0.0.1-security",
     "fs-extra": "^7.0.1",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",

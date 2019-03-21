@@ -1,0 +1,18 @@
+<%if(isTab){%>
+  <%data.forEach(function(item,index){%>
+    <div class ="tap-wrap J-tap-wrap" data-id="<%=index%>">
+      <%=item.title%>
+    </div>
+  <%})%>
+<%}%>
+<%if(isList){%>
+  <%data.forEach(function(item,index){%>
+    <div class="list-wrap J-list-wrap">
+      <%item.list && item.list.forEach(function(v,k){%>
+        <div class="list-item"><%=v.content%></div>
+      <%})%>
+    </div>
+  <%})%>
+<%}%>
+
+  

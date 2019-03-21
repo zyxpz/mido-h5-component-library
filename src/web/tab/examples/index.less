@@ -1,0 +1,87 @@
+.app {
+	width: 100%;
+	height: 200px;
+	background: blueviolet;
+}
+.main {
+	width: 100%;
+	height: 200px;
+	background: blueviolet;
+}
+.content {
+	width: 100%;
+	.wrap {
+		overflow: hidden;
+		.tap-slide {
+			.scroll-touch;
+			.tap-content {
+				position: relative;
+				.display-box;
+			}
+		}
+	}
+	.direction-wrap {
+		.display-box;
+	}
+	.right-wrap, .left-wrap {
+		.tap-content {
+			.box-direction;
+			padding: 0 20px;
+		}
+	}
+
+	.tap-wrap-common {
+		.display-box;
+		.box-pack-center;
+		.box-align;
+		width: 200px;
+	}
+	.right-wrap {
+		flex-direction: row-reverse;
+	}
+	.bottom-wrap {
+		flex-direction: column-reverse;
+	}
+	.list-content {
+		position: relative;
+		.display-box;
+		.box-flex;
+		overflow: hidden;
+	}
+}
+
+.display-box {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+}
+.box-direction {
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	flex-direction: column;
+}
+.box-flex(@scale:1) {
+	-webkit-box-flex: @scale;
+	-webkit-flex: @scale;
+}
+.box-align(@align:center) {
+	-webkit-box-align: @align;
+	-webkit-align-items: @align;
+	align-items: @align;
+}
+.box-pack-center {
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	justify-content: center;
+}
+.scroll-touch {
+	// .display-box;
+	white-space: nowrap;
+	overflow-x: auto;
+	overflow-y: hidden;
+	-webkit-overflow-scrolling: touch;
+	&::-webkit-scrollbar {
+		display: none !important;
+	}
+}
