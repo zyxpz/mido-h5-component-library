@@ -1,8 +1,11 @@
-const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+import './index.less';
 
 export default class Picker {
 	constructor(opts) {
 		this.wrap = opts.wrap;
+		this.value = opts.value || [];
+		this.defaultValue = opts.defaultValue || '';
+		this.onChange = opts.onChange || function loop() {};
 
 		this.startY = 0;
 		this.moveing = false;
@@ -39,7 +42,7 @@ export default class Picker {
 
 		this.scrollY = this.lastY - y + this.startY;
 
-		this.content.style.cssText = `transform: translate3d(0,${-this.scrollY}px,0);`;
+		this.setTransform(this.content.style, `translate3d(0,${-this.scrollY}px,0)`);
 	}
 
 	touchEnd() {
@@ -59,6 +62,8 @@ export default class Picker {
 			targetY = height;
 		}
 		this.scrollTo(0, targetY, .3);
+
+		this.handleOnChange();
 	}
 
 	scrollTo = (_x, y, time = .3) => {
@@ -74,31 +79,77 @@ export default class Picker {
 		}
 	};
 
+	select() {
+		const value = this.defaultValue;
+		this.content.childNodes.forEach((item, i) => {
+			if (item.getAttribute('data-value') === value) {
+				if (i < 0 || i >= this.content.childNodes.length) {
+					return;
+				}
+				this.scrollTo(0, i * item.offsetHeight);
+			}
+		});
+	}
+
+	eventListener() {
+		this.wrap.addEventListener('touchstart', (e) => this.touchStart(e.touches[0].pageY));
+		this.wrap.addEventListener('touchmove', (e) => this.touchMove(e.touches[0].pageY));
+		this.wrap.addEventListener('touchend', () => this.touchEnd());
+	}
+
+	handleOnChange() {
+		this.content.childNodes.forEach(item => {
+			if (this.scrollY / item.getBoundingClientRect().height === Number(item.getAttribute('data-tap'))) {
+				this.onChange(item.getAttribute('data-value'));
+			}
+		});
+	}
+
 	render() {
 		const div = document.createElement('div');
+		div.className = 'mido-picker J-mido-picker';
 		div.innerHTML =
 			`
-        <div class="mido-picker">
-          <div class="mido-picker-mask"></div>
-          <div class="mido-picker-indicator"></div>
+          <div class="mido-picker-mask J-mido-picker-mask"></div>
+          <div class="mido-picker-indicator J-mido-picker-indicator"></div>
           <div class="mido-picker-content J-mido-picker-content"></div>
-        </div>
     `;
 
 		this.wrap.appendChild(div);
+
+		const rootHei = document.querySelector('.J-mido-picker').getBoundingClientRect().height;
+
+		const mask = document.querySelector('.J-mido-picker-mask');
+
+		const indicator = document.querySelector('.J-mido-picker-indicator');
 
 		const content = document.querySelector('.J-mido-picker-content');
 
 		this.content = content;
 
-		arr.forEach((item, i) => {
-			content.innerHTML += `<li class="mido-picker-content-li" data-tap=${i}>${item}</li>`;
+		this.value.forEach((item, i) => {
+			content.innerHTML += `<li class="mido-picker-content-li" data-tap="${i}" data-value="${item}">${item}</li>`;
 		});
 
-		this.wrap.addEventListener('touchstart', (e) => this.touchStart(e.touches[0].pageY));
-		this.wrap.addEventListener('touchmove', (e) => this.touchMove(e.touches[0].pageY));
-		this.wrap.addEventListener('touchend', () => {
-			this.touchEnd();
-		});
+		const itemHei = content.children[0].getBoundingClientRect().height;
+
+		let num = Math.floor(rootHei / itemHei);
+
+		if (num % 2 === 0) {
+			num--;
+		}
+		num--;
+		num /= 2;
+
+		content.style.padding = `${num * itemHei}px 0`;
+
+		mask.style.backgroundSize = `100% ${num * itemHei}px`;
+
+		indicator.style.top = `${num * itemHei}px`;
+
+
+		this.select();
+
+		this.eventListener();
 	}
 }
