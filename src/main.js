@@ -10,4 +10,5 @@ export htmlJson from './web/htmlJson/index';
 export Resizer from './web/resizer/index';
 export RollerSlide from './web/rollerSlide/index';
 export Picker from './web/Picker/index';
+export MultiPicker from './web/MultiPicker/index';
 export DatePicker from './web/DatePicker/index';

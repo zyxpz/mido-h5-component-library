@@ -4,17 +4,20 @@ export default class Picker {
 	constructor(opts) {
 		this.wrap = opts.wrap;
 		this.value = opts.value || [];
+		this.key = opts.key || '';
 		this.defaultValue = opts.defaultValue || '';
 		this.onChange = opts.onChange || function loop() {};
+		this.defaultSelectData = opts.defaultSelectData || function loop() {};
 
 		this.startY = 0;
 		this.moveing = false;
 		this.lastY = 0;
 		this.scrollY = -1;
-	}
 
-	init() {
+		this.defaultSelectValue = false;
+
 		this.render();
+
 	}
 
 	setTransform(dom, value) {
@@ -81,26 +84,50 @@ export default class Picker {
 
 	select() {
 		const value = this.defaultValue;
-		this.content.childNodes.forEach((item, i) => {
-			if (item.getAttribute('data-value') === value) {
-				if (i < 0 || i >= this.content.childNodes.length) {
-					return;
+		this.defaultSelectValue = true;
+		if (value) {
+			this.content.childNodes.forEach((item, i) => {
+				if (item.getAttribute('data-value') === value) {
+					if (i < 0 || i >= this.content.childNodes.length) {
+						return;
+					}
+					this.scrollTo(0, i * item.offsetHeight);
 				}
-				this.scrollTo(0, i * item.offsetHeight);
-			}
-		});
+			});
+		} else {
+			this.scrollTo(0, 0);
+		}
 	}
 
-	eventListener() {
-		this.wrap.addEventListener('touchstart', (e) => this.touchStart(e.touches[0].pageY));
-		this.wrap.addEventListener('touchmove', (e) => this.touchMove(e.touches[0].pageY));
-		this.wrap.addEventListener('touchend', () => this.touchEnd());
+	eventListener(dom) {
+		dom.addEventListener('touchstart', (e) => this.touchStart(e.touches[0].pageY));
+		dom.addEventListener('touchmove', (e) => this.touchMove(e.touches[0].pageY));
+		dom.addEventListener('touchend', () => this.touchEnd());
 	}
 
 	handleOnChange() {
 		this.content.childNodes.forEach(item => {
 			if (this.scrollY / item.getBoundingClientRect().height === Number(item.getAttribute('data-tap'))) {
-				this.onChange(item.getAttribute('data-value'));
+				if (this.key) {
+					if (this.defaultSelectValue) {
+						this.defaultSelectData({
+							[this.key]: item.getAttribute('data-value')
+						});
+						this.defaultSelectValue = false;
+					} else {
+						this.onChange({
+							[this.key]: item.getAttribute('data-value')
+						});
+					}
+
+				} else {
+					if (this.defaultSelectValue) {
+						this.defaultSelectData(item.getAttribute('data-value'));
+						this.defaultSelectValue = false;
+					} else {
+						this.onChange(item.getAttribute('data-value'));
+					}
+				}
 			}
 		});
 	}
@@ -109,23 +136,23 @@ export default class Picker {
 
 		const div = document.createElement('div');
 		div.className = 'mido-picker J-mido-picker';
-		
+
 		div.innerHTML =
 			`
-          <div class="mido-picker-mask J-mido-picker-mask"></div>
-          <div class="mido-picker-indicator J-mido-picker-indicator"></div>
-          <div class="mido-picker-content J-mido-picker-content"></div>
+          <div class="mido-picker-mask J-mido-picker-mask-${this.key}"></div>
+          <div class="mido-picker-indicator J-mido-picker-indicator-${this.key}"></div>
+          <div class="mido-picker-content J-mido-picker-content-${this.key}"></div>
     `;
 
 		this.wrap.appendChild(div);
 
 		const rootHei = document.querySelector('.J-mido-picker').getBoundingClientRect().height;
 
-		const mask = document.querySelector('.J-mido-picker-mask');
+		const mask = document.querySelector(`.J-mido-picker-mask-${this.key}`);
 
-		const indicator = document.querySelector('.J-mido-picker-indicator');
+		const indicator = document.querySelector(`.J-mido-picker-indicator-${this.key}`);
 
-		const content = document.querySelector('.J-mido-picker-content');
+		const content = document.querySelector(`.J-mido-picker-content-${this.key}`);
 
 		this.content = content;
 
@@ -152,6 +179,6 @@ export default class Picker {
 
 		this.select();
 
-		this.eventListener();
+		this.eventListener(mask);
 	}
 }
