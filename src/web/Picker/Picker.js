@@ -50,10 +50,10 @@ export default class Picker {
 
 		let targetY = this.scrollY;
 
-		const height = (this.content.children.length - 1) * this.content.children[0].offsetHeight;
+		const height = (this.content.children.length - 1) * this.content.children[0].getBoundingClientRect().height;
 
-		if (targetY % this.content.children[0].offsetHeight !== 0) {
-			targetY = Math.round(targetY / this.content.children[0].offsetHeight) * this.content.children[0].offsetHeight;
+		if (targetY % this.content.children[0].getBoundingClientRect().height !== 0) {
+			targetY = Math.round(targetY / this.content.children[0].getBoundingClientRect().height) * this.content.children[0].getBoundingClientRect().height;
 		}
 
 		if (targetY < 0) {
@@ -63,7 +63,6 @@ export default class Picker {
 		}
 		this.scrollTo(0, targetY, .3);
 
-		this.handleOnChange();
 	}
 
 	scrollTo = (_x, y, time = .3) => {
@@ -76,6 +75,7 @@ export default class Picker {
 					this.setTransition(this.content.style, '');
 				}
 			}, +time * 1000);
+			this.handleOnChange();
 		}
 	};
 
@@ -106,8 +106,10 @@ export default class Picker {
 	}
 
 	render() {
+
 		const div = document.createElement('div');
 		div.className = 'mido-picker J-mido-picker';
+		
 		div.innerHTML =
 			`
           <div class="mido-picker-mask J-mido-picker-mask"></div>
@@ -128,7 +130,7 @@ export default class Picker {
 		this.content = content;
 
 		this.value.forEach((item, i) => {
-			content.innerHTML += `<li class="mido-picker-content-li" data-tap="${i}" data-value="${item}">${item}</li>`;
+			content.innerHTML += `<div class="mido-picker-content-li" data-tap="${i}" data-value="${item}">${item}</div>`;
 		});
 
 		const itemHei = content.children[0].getBoundingClientRect().height;
