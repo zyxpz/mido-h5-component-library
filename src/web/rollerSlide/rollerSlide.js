@@ -27,12 +27,18 @@ export default class RollerSlide {
 		// 父元素高度
 		this.warpH = this._wrap.offsetHeight;
 
+		const newChild = [];
+
 		// 子元素铺满父元素
 		this._wrap.childNodes.forEach((e, i) => {
 			if (e.nodeType === 1) {
-				e.style.height = `${this.warpH}px`;
-				e.setAttribute('data-tap', i);
+				newChild.push(e);
 			}
+		});
+
+		newChild.forEach((item, i) => {
+			item.style.height = `${this.warpH}px`;
+			item.setAttribute('data-tap', i);
 		});
 		this.handleChildClassName(this.index);
 		this.handleMoveEvent();
