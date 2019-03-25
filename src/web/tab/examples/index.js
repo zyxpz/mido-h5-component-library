@@ -138,7 +138,7 @@ const data = [
 import('../../../main').then(({ Tab }) => {
 	const tab = new Tab({
 		wrap: $('.content'), // 需要添加的元素
-		direction: 'top', // tab所处的方向
+		direction: 'left', // tab所处的方向
 		data, // 传进的数据
 		size: '14px', // 字体大小
 		tabListBorder: '1px solid #ddd', // tab列表边框
@@ -146,10 +146,10 @@ import('../../../main').then(({ Tab }) => {
 		time: 0.5, // 动画时间
 		tabColor: '#ccc', // tab字体颜色
 		height: 375, // tab高度,一般是横向分的时候设置
-		// tabHeight: '125px', // 设置tab两边高度
-		// tabWidth: '60px', // 滑动切换宽度
-		tabHeight: '60px', // 设置tab高度
-		tabWidth: '125px', // 设置tab宽度
+		tabHeight: '125px', // 设置tab高度
+		tabWidth: '60px', // 设置tab宽度
+		// tabHeight: '60px', // 设置tab高度
+		// tabWidth: '125px', // 设置tab宽度
 		useOnPan: true, // 是否使用手动拖动
 		tabIsAnimation: true, // tab切换动画
 		isAnimation: true, // 主要内容区动画
