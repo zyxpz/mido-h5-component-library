@@ -1,29 +1,16 @@
+import {
+	MultiPicker
+} from '../../main';
 import './index.less';
 
-const getDaysInMonth = (date) => new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
-
-const pad = (n) => n < 10 ? `0${n}` : n + '';
-
-const cloneDate = (date) => new Date(+date);
-
-const setMonth = (date, month) => {
-	date.setDate(Math.min(date.getDate(), getDaysInMonth(new Date(date.getFullYear(), month))));
-	date.setMonth(month);
-};
-
-const DATETIME = 'datetime';
-const DATE = 'date';
-const TIME = 'time';
-const MONTH = 'month';
-const YEAR = 'year';
-const ONE_DAY = 24 * 60 * 60 * 1000;
-
-export default class Picker {
+export default class DatePicker {
 	constructor(opts) {
+		this.wrap = opts.wrap;
 		this.mode = opts.mode || 'deteTime'; // 默认为时间选择器
 		this.use12Hours = opts.use12Hours || false; // 小时制
 		this.minDate = opts.defaultMinDate || new Date(2000, 1, 1, 0, 0, 0); // 设置默认最小时间
 		this.maxDate = opts.defaultMaxDate || new Date(2030, 1, 1, 0, 0, 0); // 设置默认最大时间
+		this.labelShow = opts.labelShow || false;
 		this.label = opts.label || {
 			year: '年',
 			month: '月',
@@ -31,97 +18,124 @@ export default class Picker {
 			hour: '时',
 			minute: '分'
 		};
-
-
 		this.minYear = this.minDate.getFullYear(); // 获取最小年份
 		this.maxYear = this.maxDate.getFullYear(); // 获取最大年份
-		this.minMonth = this.minDate.getMonth(); // 获取最小月份
-		this.maxMonth = this.maxDate.getMonth(); // 获取最大月份
-		this.minDay = this.minDate.getDate(); // 获取最小天数
-		this.maxDay = this.maxDate.getDate(); // 获取最大天数
-		this.minHour = this.minDate.getHours(); // 获取最小小时
-		this.maxHour = this.maxDate.getHours(); // 获取最大小时
-		this.minMinute = this.minDate.getMinutes(); // 获取最小分钟
-		this.maxMinute = this.maxDate.getMinutes(); // 获取最大分钟
 
-		this.minuteStep = 1;
+		this.onChange = opts.onChange || function loop() {};
+
+		this.init();
 	}
 
 	init = () => {
-		this.getDateYear();
-
-		this.render();
+		const	date = new Date();
+		this.render(date);
 	}
 
 	// 获取年
-	getDateYear = () => {
+	getDateYear = (date) => {
 		// 所有年份
 		const years = [];
 		for (let i = this.minYear; i <= this.maxYear; i++) {
-			years.push({
-				value: i,
-				label: `${i}${this.label.year}`
-			});
+			years.push(
+				this.labelShow ? `${i}${this.label.year}` : i
+			);
 		}
-
-		// // 所有月份
-		// const months = [];
-		// let minMonth = 0;
-		// let maxMonth = 11;
-		// if (this.minYear === selYear) {
-		// 	minMonth = this.minMonth;
-		// }
-		// if (this.maxYear === selYear) {
-		// 	maxMonth = this.maxMonth;
-		// }
-
-		// for (let i = minMonth; i <= maxMonth; i++) {
-		// 	months.push({
-		// 		value: i,
-		// 		label: `${i}${this.label.month}`
-		// 	});
-		// }
-
-		// // 所有天数
-		// const days = [];
-		// let minDay = 1;
-		// let maxDay = getDaysInMonth(date);
-
-		// if (this.minYear === selYear && this.minMonth === selMonth) {
-		// 	minDay = this.minDay;
-		// }
-		// if (this.maxYear === selYear && this.maxMonth === selMonth) {
-		// 	maxDay = maxDateDay;
-		// }
-		// for (let i = minDay; i <= maxDay; i++) {
-		// 	days.push({
-		// 		value: i,
-		// 		label: `${i}${this.label.day}`
-		// 	});
-		// }
-
-		this.years = years;
+		this.dateYear = date.getFullYear();
+		return {
+			defaultValue: this.labelShow ? `${date.getFullYear()}${this.label.year}` : `${date.getFullYear()}`,
+			value: years
+		};
 	}
 
 	// 获取每年对应的月份
-	getDateMonth = (year) => {
+	getDateMonth = (date) => {
+		const months = [];
+		for (let i = 0; i < 12; i++) {
+			months.push(
+				this.labelShow ? `${i + 1}${this.label.month}` : i + 1
+			);
+		}
 
+		this.dateMonth = date.getMonth() + 1;
+
+		return {
+			defaultValue: this.labelShow ? `${date.getMonth() + 1}${this.label.month}` : `${date.getMonth() + 1}`,
+			value: months
+		};
 	}
 
-	render() {
+	// 获取天
+	getDateDay = (date) => {
+		const days = [];
+		const dayLen = new Date(this.dateYear, this.dateMonth, 0).getDate();
+		for (let i = 1; i <= dayLen; i++) {
+			days.push(
+				this.labelShow ? `${i}${this.label.day}` : i
+			);
+		}
+
+		return {
+			defaultValue: this.labelShow ? `${date.getDate()}${this.label.day}` : `${date.getDate()}`,
+			value: days
+		};
+	}
+
+	// 获取小时
+	getDateHour = (date) => {
+		const hours = [];
+		for (let i = 0; i < 24; i++) {
+			hours.push(this.labelShow ? `${i}${this.label.hour}` : i);
+		}
+
+		return {
+			defaultValue: this.labelShow ? `${date.getHours()}${this.label.hour}` : `${date.getHours()}`,
+			value: hours
+		};
+	}
+
+	// 获取分
+	getDateMinutes = (date) => {
+		const minutes = [];
+		for (let i = 0; i < 60; i++) {
+			minutes.push(
+				this.labelShow ? `${i}${this.label.minute}` : i
+			);
+		}
+		return {
+			defaultValue: this.labelShow ? `${date.getMinutes()}${this.label.minute}` : `${date.getMinutes()}`,
+			value: minutes
+		};
+	}
+
+	handleOnChange = (val) => {
+		const newVal = [];
+		val.forEach(item => {
+			const newItem = item.replace(/[\u4e00-\u9fa5]/g, '');
+			newVal.push(newItem);
+		});
+
+		this.onChange(newVal);
+	}
+ 
+	settingData = (date) => [
+		this.getDateYear(date),
+		this.getDateMonth(date),
+		this.getDateDay(date),
+		this.getDateHour(date),
+		this.getDateMinutes(date)
+	]
+
+	render(date) {
+		const self = this;
 		const div = document.createElement('div');
-		const app = document.querySelector('.app');
-		div.innerHTML = 
-		`
-			<div class="mido-picker-wrap">
-				<div class="mido-picker-year-list J-mido-picker-year"></div>
-			</div>
-		`;
-		app.appendChild(div);
-		const yearEle = document.querySelector('.J-mido-picker-year');
-		this.years.forEach((item) => {
-			console.log(item);
-			yearEle.innerHTML += `<div class="mido-picker-year" data-value=${item.value}>${item.label}</div>`;
+		div.className = 'mido-deta-picker';
+		this.wrap.appendChild(div);
+		new MultiPicker({
+			wrap: div,
+			value: self.settingData(date),
+			onChange(val) {
+				self.handleOnChange(val);
+			}
 		});
 	}
 };

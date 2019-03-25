@@ -70,6 +70,7 @@ import { xxx } from 'mido-h5-cp';
 - [鼠标滚轮事件](https://github.com/zyxpz/mido-h5-cp/tree/master/src/web/rollerSlide)
 - [Picker](https://github.com/zyxpz/mido-h5-cp/tree/master/src/web/Picker)
 - [MultiPicker](https://github.com/zyxpz/mido-h5-cp/tree/master/src/web/MultiPicker)
+- [DatePicker](https://github.com/zyxpz/mido-h5-cp/tree/master/src/web/DatePicker)
 
 ## 通用方法
 - [获取值](https://github.com/zyxpz/mido-h5-cp/tree/master/src/web/findData)
