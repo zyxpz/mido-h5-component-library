@@ -14,6 +14,8 @@ export default class Picker {
 		this.lastY = 0;
 		this.scrollY = -1;
 
+		this.animate = false;
+
 		this.defaultSelectValue = false;
 
 		this.render();
@@ -64,6 +66,9 @@ export default class Picker {
 		} else if (targetY > height) {
 			targetY = height;
 		}
+
+		this.animate = true;
+
 		this.scrollTo(0, targetY, .3);
 
 	}
@@ -71,7 +76,9 @@ export default class Picker {
 	scrollTo = (_x, y, time = .3) => {
 		if (this.scrollY !== y) {
 			this.scrollY = y;
-			this.setTransition(this.content.style, `cubic-bezier(0,0,0.2,1.15) ${time}s`);
+			if (this.animate) {
+				this.setTransition(this.content.style, `cubic-bezier(0,0,0.2,1.15) ${time}s`);
+			}
 			this.setTransform(this.content.style, `translate3d(0,${-y}px,0)`);
 			setTimeout(() => {
 				if (this.content) {
@@ -85,6 +92,9 @@ export default class Picker {
 	select() {
 		const value = this.defaultValue;
 		this.defaultSelectValue = true;
+
+		this.animate = false;
+
 		if (value) {
 			this.content.childNodes.forEach((item, i) => {
 				if (item.getAttribute('data-value') === value) {

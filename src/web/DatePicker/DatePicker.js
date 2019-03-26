@@ -23,11 +23,15 @@ export default class DatePicker {
 
 		this.onChange = opts.onChange || function loop() {};
 
+		this.setData = [];
+
+		this.isChange = false;
+
 		this.init();
 	}
 
 	init = () => {
-		const	date = new Date();
+		const date = new Date();
 		this.render(date);
 	}
 
@@ -115,20 +119,37 @@ export default class DatePicker {
 		});
 
 		this.onChange(newVal);
+
+		this.change = true;
+
+		newVal[1] = newVal[1] - 1;
+		this.settingData(new Date(...newVal));
 	}
- 
-	settingData = (date) => [
-		this.getDateYear(date),
-		this.getDateMonth(date),
-		this.getDateDay(date),
-		this.getDateHour(date),
-		this.getDateMinutes(date)
-	]
+
+	settingData = (date) => {
+		this.setData = [
+			this.getDateYear(date),
+			this.getDateMonth(date),
+			this.getDateDay(date),
+			this.getDateHour(date),
+			this.getDateMinutes(date)
+		];
+
+		if (this.change) {
+			this.wrap.removeChild(document.querySelector('.mido-date-picker'));
+			this.change = false;
+			this.render(date);
+		}
+
+		return this.setData;
+	}
+
+
 
 	render(date) {
 		const self = this;
 		const div = document.createElement('div');
-		div.className = 'mido-deta-picker';
+		div.className = 'mido-date-picker';
 		this.wrap.appendChild(div);
 		new MultiPicker({
 			wrap: div,
