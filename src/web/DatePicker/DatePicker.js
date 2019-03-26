@@ -21,7 +21,7 @@ export default class DatePicker {
 		this.minYear = this.minDate.getFullYear(); // 获取最小年份
 		this.maxYear = this.maxDate.getFullYear(); // 获取最大年份
 
-		this.onChange = opts.onChange || function loop() {};
+		this.onChange = opts.onChange || function loop() { };
 
 		this.setData = [];
 
@@ -122,7 +122,14 @@ export default class DatePicker {
 
 		this.change = true;
 
+		const dayLen = new Date(newVal[0], newVal[1], 0).getDate();
+
+		if (newVal[2] > dayLen) {
+			newVal[2] = dayLen.toString();
+		}
+
 		newVal[1] = newVal[1] - 1;
+
 		this.settingData(new Date(...newVal));
 	}
 
