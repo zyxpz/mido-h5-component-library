@@ -66,53 +66,6 @@ export default class Tab {
 		this.contentStyleHandel();
 		this.event();
 	}
-	// border变化设置
-	borderStyleSetting() {
-		this.tagStyle = {
-			'color': this.tagColor,
-		};
-		switch (this.direction) {
-			case 'bottom':
-				this.listBorder = {
-					'border-top': this.tabListBorder,
-				};
-				this.tagStyle = {
-					...this.tagStyle,
-					'border-top': this.tabBorder,
-				};
-				break;
-			case 'left':
-				this.listBorder = {
-					'border-right': this.tabListBorder,
-				};
-				this.tagStyle = {
-					...this.tagStyle,
-					'border-right': this.tabBorder,
-				};
-				break;
-			case 'right':
-				this.listBorder = {
-					'border-left': this.tabListBorder,
-				};
-				this.tagStyle = {
-					...this.tagStyle,
-					'border-left': this.tabBorder,
-				};
-				break;
-			default:
-				this.listBorder = {
-					'border-bottom': this.tabListBorder,
-				};
-				this.tagStyle = {
-					...this.tagStyle,
-					'border-bottom': this.tabBorder,
-				};
-				// this.tabSlide.css({
-				// 	...this.listBorder
-				// });
-				break;
-		}
-	}
 	// tab标签点击
 	tabClick(e) {
 		const that = this;
@@ -146,7 +99,6 @@ export default class Tab {
 					that.tabAnimation(that.tapContent, moveNum, false, true);
 				}
 				that.animation(that.contentWrap, that.height * id);
-
 			}
 		});
 	}
@@ -229,9 +181,6 @@ export default class Tab {
 			'height': this.tabHeight,
 			'width ': this.tabWidth,
 		});
-		this.tapContent.css({
-			...this.listBorder
-		});
 		const tapStyle = this.horizontal ? { 'width': this.tapLists.length * this.tapLists.width() } : { 'height': this.tapLists.length * this.tapLists.height() };
 		const contentStyle = this.horizontal ? { 'width': this.width * this.lists.length } : { 'height': this.height * this.lists.length };
 		const itemStyle = this.horizontal ? { 'width': this.width } : {
@@ -259,5 +208,52 @@ export default class Tab {
 				...itemStyle
 			});
 		});
+	}
+	// border变化设置
+	borderStyleSetting() {
+		this.tagStyle = {
+			'color': this.tagColor,
+		};
+		switch (this.direction) {
+			case 'bottom':
+				this.listBorder = {
+					'border-top': this.tabListBorder,
+				};
+				this.tagStyle = {
+					...this.tagStyle,
+					'border-top': this.tabBorder,
+				};
+				break;
+			case 'left':
+				this.listBorder = {
+					'border-right': this.tabListBorder,
+				};
+				this.tagStyle = {
+					...this.tagStyle,
+					'border-right': this.tabBorder,
+				};
+				break;
+			case 'right':
+				this.listBorder = {
+					'border-left': this.tabListBorder,
+				};
+				this.tagStyle = {
+					...this.tagStyle,
+					'border-left': this.tabBorder,
+				};
+				break;
+			default:
+				this.listBorder = {
+					'border-bottom': this.tabListBorder,
+				};
+				this.tagStyle = {
+					...this.tagStyle,
+					'border-bottom': this.tabBorder,
+				};
+				this.tabSlide.css({
+					...this.listBorder
+				});
+				break;
+		}
 	}
 }
