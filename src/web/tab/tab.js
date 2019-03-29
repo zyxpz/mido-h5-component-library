@@ -107,9 +107,9 @@ export default class Tab {
 					...this.tagStyle,
 					'border-bottom': this.tabBorder,
 				};
-				// this.tabSlide.css({
-				// 	...this.listBorder
-				// });
+				this.tabSlide.css({
+					...this.listBorder
+				});
 				break;
 		}
 	}
@@ -133,22 +133,24 @@ export default class Tab {
 				'border': 0,
 			});
 			// tab切换，内容区切换
+			let animationNum = 0;
+			let moveDistance = 0;
+			// tab切换，内容区切换
 			if (that.horizontal) {
-				moveNum = -(id - 1) * tabWidth;
-				if (id > 0 && id !== tabList.length - 1) {
-					that.tabAnimation(that.tapContent, moveNum, true, true);
-					e.stopPropagation();
-				}
-				that.animation(that.contentWrap, that.width * id, true);
+				animationNum = Math.floor(that.width / that.tabWidth / 2);
+				moveNum = -(id - animationNum) * that.tabWidth;
+				moveDistance = that.width * id;
 			} else {
-				moveNum = -(id - 1) * tabHeight;
-				if (id > 0 && id !== tabList.length - 1) {
-					that.tabAnimation(that.tapContent, moveNum, false, true);
-				}
-				that.animation(that.contentWrap, that.height * id);
-
+				animationNum = Math.floor(that.height / that.tabHeight / 2);
+				moveNum = -(id - animationNum) * that.tabHeight;
+				moveDistance = that.height * id;
 			}
+			if (id > animationNum && id < tabList.length - animationNum) {
+				that.tabAnimation(that.tapContent, moveNum, that.horizontal, true);
+			}
+			that.animation(that.contentWrap, moveDistance, that.horizontal);
 		});
+
 	}
 	// tab拖动函数
 	tabTouchmove() {
@@ -205,6 +207,7 @@ export default class Tab {
 	// tab切换函数
 	tabAnimation(animationWrap, istance, horizontal, isTab) {
 		const time = this.tabIsAnimation && isTab ? this.time : 0;
+		console.log(time, this.tabIsAnimation, isTab, '9999');
 		// 横向移动时的位置
 		if (horizontal) {
 			animationWrap.css({
@@ -228,9 +231,6 @@ export default class Tab {
 		this.tapLists.css({
 			'height': this.tabHeight,
 			'width ': this.tabWidth,
-		});
-		this.tapContent.css({
-			...this.listBorder
 		});
 		const tapStyle = this.horizontal ? { 'width': this.tapLists.length * this.tapLists.width() } : { 'height': this.tapLists.length * this.tapLists.height() };
 		const contentStyle = this.horizontal ? { 'width': this.width * this.lists.length } : { 'height': this.height * this.lists.length };
