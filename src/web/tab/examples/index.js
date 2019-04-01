@@ -138,7 +138,7 @@ const data = [
 import('../../../main').then(({ Tab }) => {
 	const tab = new Tab({
 		wrap: $('.content'), // 需要添加的元素
-		direction: 'left', // tab所处的方向
+		direction: 'top', // tab所处的方向
 		data, // 传进的数据
 		size: '14px', // 字体大小
 		tabListBorder: '1px solid #ddd', // tab列表边框
