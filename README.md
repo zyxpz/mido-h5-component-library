@@ -3,6 +3,8 @@
 ```vim
 npm install mido-h5-cp --save
 ```
+<details>
+<summary>使用项目需配置</summary>
 
 ## 依赖,使用模板引擎anima-template,需要在webpack引入atpl-loader
 ```vim
@@ -37,6 +39,10 @@ module: {
 		]
 	},
 ```
+</details>
+
+<details>
+<summary>引用，按需加载配置</summary>
 
 ## 使用方式 => 按需加载，需要安装 `babel-plugin-import`
 ```vim
@@ -57,10 +63,16 @@ npm install babel-plugin-import --save-dev
 	]
 }
 ```
+
 - 使用
+
 ```js
 import { xxx } from 'mido-h5-cp';
 ```
+
+</details>
+
+
 ## 组件
 - [轮播图](https://github.com/zyxpz/mido-h5-cp/tree/master/src/web/carousel)
 - [上拉刷新下拉加载](https://github.com/zyxpz/mido-h5-cp/tree/master/src/web/pullDown)
